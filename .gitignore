@@ -3,3 +3,6 @@
 *.toc
 *.log
 *.backup
+*.bbl
+*.blg
+*.out

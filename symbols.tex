@@ -1,6 +1,12 @@
+% markup for text
+\newcommand{\defNotion}[1]{\emph{#1}} % for the defined notion in a definition
+
 % symbols
-%% sets
+%% sets of numbers
 \newcommand{\IN}{\mathbb{N}}
+%% sets of functions
+\newcommand{\setOfFunctions}[1]{\mathcal{#1}}
+\newcommand{\FP}{\setOfFunctions{FP}}
 %% complexity classes
 \newcommand{\cclass}[1]{\text{#1}}
 \newcommand{\OPT}{\cclass{OPT}}
@@ -9,4 +15,6 @@
 \newcommand{\NEXP}{\cclass{co-NEXP}}
 \newcommand{\coNEXP}{\cclass{co-NEXP}}
 
+% operators
+%% on machines
 \DeclareMathOperator{\runtime}{time}
