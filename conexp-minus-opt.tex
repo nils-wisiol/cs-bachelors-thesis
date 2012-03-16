@@ -14,17 +14,16 @@
     That is, as long as you put proofs of polynomial length (relative to \(x\)) into \(f_i\), you will not get \(x\) out.
     Let \(L = \bigcup_{i > 0} L_i'\).
 
-    First, we obtain \(L \in \NTIME(t(n))\). For any given \(x = 0^i10^*\), one can simulate for every \(y \in \Sigma^*\) up to \(t(|x|)\) steps a deterministic machine calculating \(f_i(y)\).
-    \TODO{is that really polynomial? Do we need a lower bound? How about a function honestly lower than t?}
+    First, we obtain \(L \in \NTIME(t(n))\). For any given \(x\), one can simulate for every \(y \in \Sigma^*\) up to \(t(|x|)\) steps of a deterministic machine calculating \(f_i(y)\).
 
-    For a proof systems \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(L_i \ni x = 0^i1z \notin L_i'\). Then there is an \(y\) with \(|y| \leq t(n)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Speaking informally, every proof system \(f_i\) for \(L\) is ``slow'' on \(L_i' \subset L\).
+    For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(L_i \ni x = 0^i1z \notin L_i'\). Then there is an \(y\) with \(|y| \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y| > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) is ``slow'' on \(L_i' \subset L\).
 
     Assume now, for contradiction, that \(f_i\) is a optimal proof system for \(L\). Let \(g\) be a function defined as
       \[ g(bx) = \begin{cases}
                   f(x) & (b = 0), \\
                   x & (b = 1 \text{ and } x = 0^i10^* \in L_i).
                  \end{cases} \]
-    Now \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(p \in \FP\) such that for all \(x \in L_i'\), \(f_i(p(x)) = g(x)\). But as \(p \in \FP\), \(|p(x)| =: y \leq q(|x|) \leq t(|x|)\) for a polynomial \(q\). According to the definition of \(L_i'\), this yields \(f_i(y) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
+    \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(p \in \FP\) such that for all \(x \in L_i'\), \(f_i(p(x)) = g(x)\). But as \(p \in \FP\), \(|p(x)| =: y \leq q(|x|) \leq t(|x|)\) for a polynomial \(q\). According to the definition of \(L_i'\), this yields \(f_i(y) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
   \end{proof}
 
 
