@@ -1,21 +1,30 @@
 \chapter{A set in $\coNEXP \setminus \OPT$}
-  \begin{theorem}[true statement]
-    This is a true statement.
+  In this section, we will show that there are sets without optimal proof systems.
+  
+  \begin{theorem}
+    Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \NTIME(t(n))\) that has no p-optimal proof system.
   \end{theorem}
+
+  Jochen Messner showed in \cite{Mes99} that under the same presumptions as in our theorem, there is a language \(L \in \NTIME(t(n))\) without an optimal acceptor. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\).
+  
   \begin{proof}
-    Without loss of generality this is clearly true.
+    Let \(f_1, f_2, ...\) be a enumeration of all \(\FP\)-functions with \(\runtime(f_i) \leq n^i + i\). \TODO{How is that obtained?}
+    For any \(i > 0\), let \(L_i\) be the regular language described by the expression \(0^i10^*\). Define
+      \[ L_i' = \{ x \in L_i | \forall_{ y \in \Sigma^* } |y| \leq t(|x|) \implies f_i(y) \neq x \}. \]
+    That is, as long as you put proofs of polynomial length (relative to \(x\)) into \(f_i\), you will not get \(x\) out.
+    Let \(L = \bigcup_{i > 0} L_i'\).
+
+    First, we obtain \(L \in \NTIME(t(n))\). For any given \(x = 0^i10^*\), one can simulate for every \(y \in \Sigma^*\) up to \(t(|x|)\) steps a deterministic machine calculating \(f_i(y)\).
+    \TODO{is that really polynomial? Do we need a lower bound? How about a function honestly lower than t?}
+
+    For a proof systems \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(L_i \ni x = 0^i1z \notin L_i'\). Then there is an \(y\) with \(|y| \leq t(n)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Speaking informally, every proof system \(f_i\) for \(L\) is ``slow'' on \(L_i' \subset L\).
+
+    Assume now, for contradiction, that \(f_i\) is a optimal proof system for \(L\). Let \(g\) be a function defined as
+      \[ g(bx) = \begin{cases}
+                  f(x) & (b = 0), \\
+                  x & (b = 1 \text{ and } x = 0^i10^* \in L_i).
+                 \end{cases} \]
+    Now \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(p \in \FP\) such that for all \(x \in L_i'\), \(f_i(p(x)) = g(x)\). But as \(p \in \FP\), \(|p(x)| =: y \leq q(|x|) \leq t(|x|)\) for a polynomial \(q\). According to the definition of \(L_i'\), this yields \(f_i(y) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
   \end{proof}
 
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et tellus odio, elementum tincidunt massa. Pellentesque mattis porta leo eu imperdiet. Nullam tempus, odio a rhoncus feugiat, elit lectus dictum ante, id ornare elit urna sit amet elit. Nam feugiat sapien eu ante vestibulum hendrerit. Sed sit amet mauris sed est semper fermentum. Sed elit tortor, imperdiet a molestie in, convallis at orci. Mauris vitae est ut purus laoreet fermentum in ac metus. Etiam mollis faucibus dui euismod dictum.
 
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et tellus odio, elementum tincidunt massa. Pellentesque mattis porta leo eu imperdiet. Nullam tempus, odio a rhoncus feugiat, elit lectus dictum ante, id ornare elit urna sit amet elit. Nam feugiat sapien eu ante vestibulum hendrerit. Sed sit amet mauris sed est semper fermentum. Sed elit tortor, imperdiet a molestie in, convallis at orci. Mauris vitae est ut purus laoreet fermentum in ac metus. Etiam mollis faucibus dui euismod dictum.  
-  
-  \begin{theorem}[true statement]
-    This is a true statement.
-  \end{theorem}  
-
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus et tellus odio, elementum tincidunt massa. Pellentesque mattis porta leo eu imperdiet. Nullam tempus, odio a rhoncus feugiat, elit lectus dictum ante, id ornare elit urna sit amet elit. Nam feugiat sapien eu ante vestibulum hendrerit. Sed sit amet mauris sed est semper fermentum. Sed elit tortor, imperdiet a molestie in, convallis at orci. Mauris vitae est ut purus laoreet fermentum in ac metus. Etiam mollis faucibus dui euismod dictum.
-
-  \begin{lemma}
-    Some lemma to proof the next result.
-  \end{lemma}
