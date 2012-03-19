@@ -2,10 +2,10 @@
   In this section, we will show that there are sets without optimal proof systems.
   
   \begin{theorem}
-    Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \NTIME(t(n))\) that has no p-optimal proof system.
+    Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no p-optimal proof system.
   \end{theorem}
 
-  Jochen Messner showed in \cite{Mes99} that under the same presumptions as in our theorem, there is a language \(L \in \NTIME(t(n))\) without an optimal acceptor. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\).
+  Jochen Messner showed in \cite{Mes99} that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\).
   
   \begin{proof}
     Let \(f_1, f_2, ...\) be a enumeration of all \(\FP\)-functions with \(\runtime(f_i) \leq n^i + i\). \TODO{How is that obtained?}
@@ -14,7 +14,11 @@
     That is, as long as you put proofs of polynomial length (relative to \(x\)) into \(f_i\), you will not get \(x\) out.
     Let \(L = \bigcup_{i > 0} L_i'\).
 
-    First, we obtain \(L \in \NTIME(t(n))\). For any given \(x\), one can simulate for every \(y \in \Sigma^*\) up to \(t(|x|)\) steps of a deterministic machine calculating \(f_i(y)\).
+    First, we obtain \(L \in \coNTIME(t(n))\). To show this, one considers
+      \[L \in \coNTIME \Leftrightarrow \overline{L} = \overline{\bigcup_{i > 0} L_i'} = \bigcap_{i > 0} \overline{L_i'} \in \NTIME.\]
+    By negating the condition for \(L_i'\), we get
+      \[ \overline{L_i'} = \{ x \in \Sigma^* | x \notin L_i \vee \left( \exists_{y \in \Sigma^*} |y| \leq t(|x|) \wedge f_i(y) = x \right) \}. \]
+    For any given \(x\), we can decide in polynomial time whether it is in any \(L_i\) or not. If it is not, then \(x\) is in \(\overline{L_i'}\) for all \(i > 0\) and therefore \(x \in \overline{L}\), so we are done. If it is in any \(L_i\), it is in exactly one \(L_i\). Let \(i^*\) be the set with \(x \in L_{i^*}\). We can simulate a deterministic polynomial-time machine calculating \(f_{i^*}(y)\) on every input \(y \in \Sigma^*\) with \(|y| \leq t(|x|)\). If, and only if, there is a path with \(f_{i^*}(y) = x\), then \(x \in \overline{L}\). In both cases, \(\overline{L} \in \NTIME(t(n))\).
 
     For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(L_i \ni x = 0^i1z \notin L_i'\). Then there is an \(y\) with \(|y| \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y| > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) is ``slow'' on \(L_i' \subset L\).
 
