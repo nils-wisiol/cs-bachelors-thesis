@@ -30,20 +30,7 @@
     \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(f^*\) such that for all \(x \in L_i'\), \(f_i(f^*(x)) = g(x)\) and \(|f^*(x)| \leq p(|x|)\) for a polynomial \(p\). Let \(q\) be the polynomial \(q(n) = p(n)^{2i}\). As \(p(|x|)\) is positive, \(p(|x|) \leq p(|x|)^{2i}\). As there is an \(n\) with \(q(n) \leq t(n)\), there is an \(x\) in \(L_i\) such that \(|f^*(x)| \leq p(|x|) \leq q(|x|) = p(|x|)^{2i} \leq t(|x|)\). According to the definition of \(L_i'\), this yields \(f_i(f^*(x)) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
   \end{proof}
 
-  Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that the density of \(L_i\) is given by
-    \[ \dens_{L_i}(n) = |\{ x \in \Sigma^*, x=0^i10^j, 0 \leq j \leq n - i - 1 \}| =
-       \begin{cases}
-        0 & (n < i), \\
-        n - i & (n \geq i). \\
-       \end{cases}
-    \]
-  From \(L_i' \subseteq L_i\) it follows that \(\dens_{L_i'} \leq \dens_{L_i}\) and so we can get a upper bound for the density of \(L\). Since the density of \(L_i\) is for all \(i > n\) zero, we get
-    \[ \dens_L(n) = \dens_{\bigcup L_i'}(n) = \sum_{i=1}^\infty \dens_{L_i'}(n) \leq \sum_{i=1}^\infty \dens_{L_i}(n) = \sum_{i=1}^n n - i = n^2 + \frac{n}{2}. \]
-  This yields
-
-  \begin{lemma}
-    With \(t(n)\) defined as above, there is a sparse language \(L \in \coNTIME(t(n))\) that has no p-optimal proof system.
-  \end{lemma}
+  Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). As \(\dens_{L_R}(n) = n\), \(L_R\) and \(L\) are both sparse.
 
   \cite{KM98} showed that, for any nonempty sets \(L\) and \(A\) with \(L \redmany A\), if \(A\) has a optimal proof system, then \(L\) also has a optimal proof system. Together with this result, we obtain
 
