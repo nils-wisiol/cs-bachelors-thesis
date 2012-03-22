@@ -1,6 +1,8 @@
 \chapter{Preliminaries}
   As mentioned before, we will first introduce important symbols and definitions. Although some familiarity with standard notions of complexity theory is assumed, here we will define most of the notions used in this thesis. For the most important ones, we will give a short discussion.
 
+  Let \(\Sigma = \{ 0, 1 \}\) denote the alphabet. The output of a Turing transducer \(M\) on input \(x \in \Sigma^*\) is denoted by \(M(x)\). If the transducer \(M\) does not accept or runs forever on input \(x\), we define \(M(x) = \perp\). We say a Turing transducer \defNotion{calculates} a partial function \(f\), if \(M(x) = f(x)\) for all \(x \in \Sigma^*\). We further define \(\runtime_M(x)\) as the number of steps the transducer \(M\) runs on input \(x \in \Sigma^*\). Similar, for a partial function \(f\), we define \(\runtime_f(x) = \runtime_M(x)\) for a transducer \(M\) calculating \(f\). \TODO{is that well-defined?} With \(\FP\), we denote the set of all partial functions \(f\) with \(\runtime_f(x) \leq p(|x|)\) for a polynomial \(p\).
+
   \begin{definition}[Proof system]
     A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\).
   \end{definition}
@@ -8,4 +10,6 @@
   \begin{definition}[OPT]
     Let \defNotion{\(\OPT\)} be the complexity class of all sets that have a p-optimal proof system.
   \end{definition}
+
+  With these notions, we will take a look at important results in the field of optimal proof systems in the next chapter. For notions not defined in this thesis, refer to a standard work of computational complexity like the one from Papadimitriou \cite{Pap94}.
 
