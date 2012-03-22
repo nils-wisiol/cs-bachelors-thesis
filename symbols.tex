@@ -2,6 +2,9 @@
 \newcommand{\defNotion}[1]{\emph{#1}} % for the defined notion in a definition
 \newcommand{\TODO}[1]{\marginpar{\footnotesize{#1}}} % for todos
 
+% reductions
+\newcommand{\redmany}{\leq_{m}^{p}}
+
 % symbols
 %% sets of numbers
 \newcommand{\IN}{\mathbb{N}}
@@ -13,9 +16,13 @@
 \newcommand{\OPT}{\cclass{OPT}}
 \newcommand{\NTIME}{\cclass{NTIME}}
 \newcommand{\coNTIME}{\cclass{co-NTIME}}
-\newcommand{\NEXP}{\cclass{co-NEXP}}
+\newcommand{\NEXP}{\cclass{NEXP}}
 \newcommand{\coNEXP}{\cclass{co-NEXP}}
+\newcommand{\NE}{\cclass{NE}}
+\newcommand{\coNE}{\cclass{co-NE}}
 
 % operators
+%% on sets
+\DeclareMathOperator{\dens}{dens}
 %% on machines
 \DeclareMathOperator{\runtime}{time}

@@ -2,32 +2,59 @@
   In this section, we will show that there are sets without optimal proof systems.
   
   \begin{theorem}
-    Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no p-optimal proof system.
+    Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system.
   \end{theorem}
 
-  Jochen Messner showed in \cite{Mes99} that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\).
+  Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\).
   
   \begin{proof}
     Let \(f_1, f_2, ...\) be a enumeration of all \(\FP\)-functions with \(\runtime(f_i) \leq n^i + i\). \TODO{How is that obtained?}
     For any \(i > 0\), let \(L_i\) be the regular language described by the expression \(0^i10^*\). Define
-      \[ L_i' = \{ x \in L_i | \forall_{ y \in \Sigma^* } |y| \leq t(|x|) \implies f_i(y) \neq x \}. \]
-    That is, as long as you put proofs of polynomial length (relative to \(x\)) into \(f_i\), you will not get \(x\) out.
+      \[ L_i' = \{ x \in L_i | \forall_{ y \in \Sigma^* } |y|^{2i} \leq t(|x|) \implies f_i(y) \neq x \}. \]
+    That is, as long as you put strings of length \(|y|^{2i} \leq t(|x|)\) into \(f_i\), you will not obtain \(x\).
     Let \(L = \bigcup_{i > 0} L_i'\).
 
     First, we obtain \(L \in \coNTIME(t(n))\). To show this, one considers
       \[L \in \coNTIME \Leftrightarrow \overline{L} = \overline{\bigcup_{i > 0} L_i'} = \bigcap_{i > 0} \overline{L_i'} \in \NTIME.\]
     By negating the condition for \(L_i'\), we get
       \[ \overline{L_i'} = \{ x \in \Sigma^* | x \notin L_i \vee \left( \exists_{y \in \Sigma^*} |y| \leq t(|x|) \wedge f_i(y) = x \right) \}. \]
-    For any given \(x\), we can decide in polynomial time whether it is in any \(L_i\) or not. If it is not, then \(x\) is in \(\overline{L_i'}\) for all \(i > 0\) and therefore \(x \in \overline{L}\), so we are done. If it is in any \(L_i\), it is in exactly one \(L_i\). Let \(i^*\) be the set with \(x \in L_{i^*}\). We can simulate a deterministic polynomial-time machine calculating \(f_{i^*}(y)\) on every input \(y \in \Sigma^*\) with \(|y| \leq t(|x|)\). If, and only if, there is a path with \(f_{i^*}(y) = x\), then \(x \in \overline{L}\). In both cases, \(\overline{L} \in \NTIME(t(n))\).
+    For any given \(x\), we can decide in polynomial time whether it is in any \(L_i\) or not. If it is not, then \(x\) is in \(\overline{L_i'}\) for all \(i > 0\) and therefore \(x \in \overline{L}\), so we are done. If it is in any \(L_i\), it is in exactly one \(L_i\). Let \(i^*\) be the set with \(x \in L_{i^*}\). We can simulate a deterministic polynomial-time machine calculating \(f_{i^*}(y)\) on every input \(y \in \Sigma^*\) with \(|y|^{2i} \leq t(|x|)\). If, and only if, there is a path with \(f_{i^*}(y) = x\), then \(x \in \overline{L}\). In both cases, \(\overline{L} \in \NTIME(t(n))\).
 
-    For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(L_i \ni x = 0^i1z \notin L_i'\). Then there is an \(y\) with \(|y| \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y| > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) is ``slow'' on \(L_i' \subset L\).
+    For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(x = 0^i1z \in L_i\) that is not in \(L_i'\). Then there is an \(y\) with \(|y|^{2i} \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y|^{2i} > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) is ``slow'' on \(L_i' \subset L\).
 
     Assume now, for contradiction, that \(f_i\) is a optimal proof system for \(L\). Let \(g\) be a function defined as
       \[ g(bx) = \begin{cases}
-                  f(x) & (b = 0), \\
-                  x & (b = 1 \text{ and } x = 0^i10^* \in L_i).
+                  f_i(x) & (b = 0), \\
+                  x & (b = 1 \text{ and } x = 0^i10^* \in L_i = L_i').
                  \end{cases} \]
-    \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(p \in \FP\) such that for all \(x \in L_i'\), \(f_i(p(x)) = g(x)\). But as \(p \in \FP\), \(|p(x)| =: y \leq q(|x|) \leq t(|x|)\) for a polynomial \(q\). According to the definition of \(L_i'\), this yields \(f_i(y) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
+    \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(f^*\) such that for all \(x \in L_i'\), \(f_i(f^*(x)) = g(x)\) and \(|f^*(x)| \leq p(|x|)\) for a polynomial \(p\). Let \(q\) be the polynomial \(q(n) = p(n)^{2i}\). As \(p(|x|)\) is positive, \(p(|x|) \leq p(|x|)^{2i}\). As there is an \(n\) with \(q(n) \leq t(n)\), there is an \(x\) in \(L_i\) such that \(|f^*(x)| \leq p(|x|) \leq q(|x|) = p(|x|)^{2i} \leq t(|x|)\). According to the definition of \(L_i'\), this yields \(f_i(f^*(x)) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
   \end{proof}
+
+  Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that the density of \(L_i\) is given by
+    \[ \dens_{L_i}(n) = |\{ x \in \Sigma^*, x=0^i10^j, 0 \leq j \leq n - i - 1 \}| =
+       \begin{cases}
+        0 & (n < i), \\
+        n - i & (n \geq i). \\
+       \end{cases}
+    \]
+  From \(L_i' \subseteq L_i\) it follows that \(\dens_{L_i'} \leq \dens_{L_i}\) and so we can get a upper bound for the density of \(L\). Since the density of \(L_i\) is for all \(i > n\) zero, we get
+    \[ \dens_L(n) = \dens_{\bigcup L_i'}(n) = \sum_{i=1}^\infty \dens_{L_i'}(n) \leq \sum_{i=1}^\infty \dens_{L_i}(n) = \sum_{i=1}^n n - i = n^2 + \frac{n}{2}. \]
+  This yields
+
+  \begin{lemma}
+    With \(t(n)\) defined as above, there is a sparse language \(L \in \coNTIME(t(n))\) that has no p-optimal proof system.
+  \end{lemma}
+
+  \cite{KM98} showed that, for any nonempty sets \(L\) and \(A\) with \(L \redmany A\), if \(A\) has a optimal proof system, then \(L\) also has a optimal proof system. Together with this result, we obtain
+
+  \begin{corollary}
+    No set \(\redmany\)-hard for \(\coNE\) has an optimal proof system. \TODO{Is this possible for \(\coNEXP\)?}
+  \end{corollary}
+
+  \begin{proof}
+    With \(t(n) = 2^n\), we can get an \(L \in \coNE\) that has no optimal proof system. Any \(\redmany\)-hard set \(A\) for \(\coNE\) is \(L \redmany A\). Together with the cited result we obtain, that \(A\) cannot have optimal proof system.
+  \end{proof}
+
+
 
 
