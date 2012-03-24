@@ -1,15 +1,43 @@
 \chapter{Preliminaries}
-  As mentioned before, we will first introduce important symbols and definitions. Although some familiarity with standard notions of complexity theory is assumed, here we will define most of the notions used in this thesis. For the most important ones, we will give a short discussion.
+  As mentioned before, we will first introduce important symbols and definitions. Although some familiarity with standard notions of complexity theory is assumed, we will here define most of the notions used in this thesis. For the most important ones, we will give a short discussion.
 
   Let \(\Sigma = \{ 0, 1 \}\) denote the alphabet. The output of a Turing transducer \(M\) on input \(x \in \Sigma^*\) is denoted by \(M(x)\). If the transducer \(M\) does not accept or runs forever on input \(x\), we define \(M(x) = \perp\). We say a Turing transducer \defNotion{calculates} a partial function \(f\), if \(M(x) = f(x)\) for all \(x \in \Sigma^*\). We further define \(\runtime_M(x)\) as the number of steps the transducer \(M\) runs on input \(x \in \Sigma^*\). Similar, for a partial function \(f\), we define \(\runtime_f(x) = \runtime_M(x)\) for a transducer \(M\) calculating \(f\). \TODO{is that well-defined?} With \(\FP\), we denote the set of all partial functions \(f\) with \(\runtime_f(x) \leq p(|x|)\) for a polynomial \(p\).
 
   \begin{definition}[Proof system]
-    A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\).
+    A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \(h\)-proof for \(x\).
   \end{definition}
 
-  \begin{definition}[OPT]
-    Let \defNotion{\(\OPT\)} be the complexity class of all sets that have a p-optimal proof system.
+  With this definition, a proof system for \(L\) is basically a polynomial time bounded function that enumerates \(L\). Although it is polynomial time bounded against the input, the shortest proof a string \(w \in L\) could be be very long.
+
+  There may be various proof systems for a language \(L\). In order to make them comparable, we define the notion of \defNotion{simulation} of proof systems.
+  
+  \begin{definition}
+    Let \(h\) and \(h'\) be proof systems for a language \(L\). If there is a polynomial \(p\) and a function \(f\) such that for all \(w \in \Sigma^*\)
+      \[
+        h(f(w)) = h'(w)
+      \]
+    and \(|f(w)| \leq p(|w|)\), then \(h\) \defNotion{simulates} \(h'\).
   \end{definition}
+
+  Speaking informally, \(f\) translates \(h\)-proof in \(h'\) and keeps the proofs polynomial length bounded. As \(f\) could be a very slow function, we define a stronger version of this notion.
+
+  \begin{definition}
+   Again, let \(h\) and \(h'\) be proof systems for a language \(L\). If \(h\) simulates \(h'\) with a function \(f\) and additionally \(f \in \FP\), \(h\) \defNotion{p-simulates} \(h'\).
+  \end{definition}
+
+  With a proof system p-simulating another, we can obtain the polynomial short proof mentioned above in polynomial short time. As said before, the shortest \(h\)-proof could still be very long. With the notion of simulation of proof systems, we can compare different proof systems for a language \(L\). With respect to these notions, we will define the best proof system as follows.
+
+  \begin{definition}
+    A proof system \(h\) for \(L\) is called optimal, if it simulates every proof system for \(L\). It is called p-optimal, if it p-simulates every proof system for \(L\).
+  \end{definition}
+
+  The existence of a optimal proof system for a arbitrary language \(L\) is not trivial. For languages in \(\P\), there is always an optimal proof system. For languages decidable in super-polynomial time, there are languages without an optimal proof system, as we will show in chapter \ref{chpConexpMinusOpt}. For that reason, we will define a complexity class containing all languages possessing a optimal proof system.
+
+  \begin{definition}
+    Let \defNotion{\(\OPT\)} be the complexity class of all sets that have a optimal proof system.
+  \end{definition}
+
+  Observe that for \(\OPT\) we use the weaker notion of simulation.
 
   With these notions, we will take a look at important results in the field of optimal proof systems in the next chapter. For notions not defined in this thesis, refer to a standard work of computational complexity like the one from Papadimitriou \cite{Pap94}.
 
