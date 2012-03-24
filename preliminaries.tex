@@ -7,7 +7,15 @@
     A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \(h\)-proof for \(x\).
   \end{definition}
 
-  With this definition, a proof system for \(L\) is basically a polynomial time bounded function that enumerates \(L\). Although it is polynomial time bounded against the input, the shortest proof a string \(w \in L\) could be be very long.
+  With this definition, a proof system for \(L\) is basically a polynomial time bounded function that enumerates \(L\). Although it is polynomial time bounded against the input, the shortest proof a string \(w \in L\) could be be very long. The function \(h\) defined by
+    \[
+       sat(x) =
+       \begin{cases}
+         \varphi & (x = \langle a, \varphi \rangle \text{ and \(\alpha\) is an satisfying assignment for \(\varphi\)}) \\
+         \perp & (\text{otherwise}) \\
+       \end{cases}
+    \]
+  is a proof system for \(\SAT\). Is is an open question, whether \(sat\) is p-optimal. Köbler and Messner showed, that this question is equivalent to a variety of well studied complexity theoretic assumptions \cite{KM00}. We will cite some of their results in lemma/chapter \TODO{well, where?}.
 
   There may be various proof systems for a language \(L\). In order to make them comparable, we define the notion of \defNotion{simulation} of proof systems.
   
