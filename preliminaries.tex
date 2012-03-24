@@ -39,13 +39,13 @@
     A proof system \(h\) for \(L\) is called optimal, if it simulates every proof system for \(L\). It is called p-optimal, if it p-simulates every proof system for \(L\).
   \end{definition}
 
-  The existence of a optimal proof system for a arbitrary language \(L\) is not trivial. For languages in \(\P\), there is always an optimal proof system. For languages decidable in super-polynomial time, there are languages without an optimal proof system, as we will show in chapter \ref{chpConexpMinusOpt}. For that reason, we will define a complexity class containing all languages possessing a optimal proof system.
+  The existence of a optimal proof system for a arbitrary language \(L\) is not trivial. For languages in \(\P\) and \(\NP\), there is always a optimal proof system, as we will see in \TODO{cite!}. For super-polynomial time complexity classes, there are languages without an optimal proof system, as we will show in chapter \ref{chpConexpMinusOpt}. For that reason, we will define a complexity class containing all languages possessing a optimal proof system.
 
   \begin{definition}
-    Let \defNotion{\(\OPT\)} be the complexity class of all sets that have a optimal proof system.
+    Let \defNotion{\(\OPT\)} be the complexity class of all languages that have a optimal proof system.
   \end{definition}
 
-  Observe that for \(\OPT\) we use the weaker notion of simulation.
+  Observe that for \(\OPT\) we use the weaker notion of simulation. As noted above, we can easily state a proof system for languages in \(P\) or \(NP\)
 
   With these notions, we will take a look at important results in the field of optimal proof systems in the next chapter. For notions not defined in this thesis, refer to a standard work of computational complexity like the one from Papadimitriou \cite{Pap94}.
 

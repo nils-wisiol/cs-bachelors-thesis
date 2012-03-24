@@ -1,6 +1,28 @@
 \chapter{A brief Overview of Proof Systems}
   After defining the important notions for this thesis, we will give a brief overview of the most important results in the field of optimal proof systems.
 
+  The following lemma gives a partial answer to the question what languages do have optimal proof systems.
+
+  \begin{lemma}
+   Every language in \(\P \cup \NP\) has a optimal proof system.
+  \end{lemma}
+
+  \begin{proof}
+    Let \(L \in \P \cup \NP\). Then there is a function \(f \in \FP\) with \(f(w) = 1 \Leftrightarrow w \in L\). To show there is a proof system, let \(h\) be defined by
+    \[
+      h(w) =
+      \begin{cases}
+        w & (f(w) = 1), \\
+        \perp & (\text{otherwise}). \\
+      \end{cases}
+    \]
+    Then \(h\) is a proof system for \(L\). To show \(h\) is optimal, let \(h'\) be a arbitrary proof system for \(L\). Then \(h' \in \FP\) by definition and we can translate \(h'\)-proofs with \(h'\) in polynomial time into \(h\)-proofs, in formulas
+    \[
+      h(h'(w)) = h(w).
+    \]
+    Therefore, \(h\) simulates every proof system \(h'\).
+  \end{proof}
+
   One basic lemma that is widely used establishes a connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. \cite{KMT03}.
 
   \begin{lemma}
