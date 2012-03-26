@@ -5,7 +5,7 @@
     Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system.
   \end{theorem}
 
-  Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\).
+  Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\). We will here give a proof that is based on the work of Messner, but stays in the notion of proof systems.
   
   \begin{proof}
     Let \(f_1, f_2, ...\) be a enumeration of all \(\FP\)-functions with \(\runtime(f_i) \leq n^i + i\). \TODO{How is that obtained?}
@@ -18,9 +18,9 @@
       \[L \in \coNTIME \Leftrightarrow \overline{L} = \overline{\bigcup_{i > 0} L_i'} = \bigcap_{i > 0} \overline{L_i'} \in \NTIME.\]
     By negating the condition for \(L_i'\), we get
       \[ \overline{L_i'} = \{ x \in \Sigma^* | x \notin L_i \vee \left( \exists_{y \in \Sigma^*} |y| \leq t(|x|) \wedge f_i(y) = x \right) \}. \]
-    For any given \(x\), we can decide in polynomial time whether it is in any \(L_i\) or not. If it is not, then \(x\) is in \(\overline{L_i'}\) for all \(i > 0\) and therefore \(x \in \overline{L}\), so we are done. If it is in any \(L_i\), it is in exactly one \(L_i\). Let \(i^*\) be the set with \(x \in L_{i^*}\). We can simulate a deterministic polynomial-time machine calculating \(f_{i^*}(y)\) on every input \(y \in \Sigma^*\) with \(|y|^{2i} \leq t(|x|)\). If, and only if, there is a path with \(f_{i^*}(y) = x\), then \(x \in \overline{L}\). In both cases, \(\overline{L} \in \NTIME(t(n))\).
+    For any given \(x\), we can decide in polynomial time whether it is in any \(L_i\) or not. If it is not, then \(x\) is in \(\overline{L_i'}\) for all \(i > 0\) and therefore \(x \in \overline{L}\), so we are done. If it is in any \(L_i\), it is in exactly one \(L_i\). Let \(i^*\) be the set with \(x \in L_{i^*}\). We can simulate \TODO{have a look at simulation runtime} a polynomial-time machine calculating \(f_{i^*}(y)\) on every input \(y \in \Sigma^*\) with \(|y|^{2i} \leq t(|x|)\). If, and only if, there is a path with \(f_{i^*}(y) = x\), then \(x \in \overline{L}\). In both cases, \(\overline{L} \in \NTIME(t(n))\).
 
-    For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(x = 0^i1z \in L_i\) that is not in \(L_i'\). Then there is an \(y\) with \(|y|^{2i} \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y|^{2i} > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) is ``slow'' on \(L_i' \subset L\).
+    For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(x = 0^i1z \in L_i\) that is not in \(L_i'\). Then there is an \(y\) with \(|y|^{2i} \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y|^{2i} > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) has ``long'' proofs on \(L_i' \subset L\).
 
     Assume now, for contradiction, that \(f_i\) is a optimal proof system for \(L\). Let \(g\) be a function defined as
       \[ g(bx) = \begin{cases}
@@ -32,7 +32,7 @@
 
   Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). As \(\dens_{L_R}(n) = n\), \(L_R\) and \(L\) are both sparse.
 
-  \cite{KM98} showed that, for any nonempty sets \(L\) and \(A\) with \(L \redmany A\), if \(A\) has a optimal proof system, then \(L\) also has a optimal proof system. Together with this result, we obtain
+  Using the relation to many-one-hard reducible sets proofed in lemma \ref{lemManyOneProofSystem}, we obtain
 
   \begin{corollary} \label{corHardSets}
     No set \(\redmany\)-hard for \(\coNE\) has an optimal proof system. \TODO{Is this possible for \(\coNEXP\)?}

@@ -1,7 +1,7 @@
 \chapter{A brief Overview of Proof Systems}
   After defining the important notions for this thesis, we will give a brief overview of the most important results in the field of optimal proof systems.
 
-  The following lemma gives a partial answer to the question what languages do have optimal proof systems.
+  \TODO{tell some history of this question \cite[p. 1]{KM00}}The following lemma gives a partial answer to the question what languages do have optimal proof systems.
 
   \begin{lemma}
    Every language in \(\P \cup \NP\) has a optimal proof system.
@@ -18,14 +18,14 @@
     \]
     Then \(h\) is a proof system for \(L\). To show \(h\) is optimal, let \(h'\) be a arbitrary proof system for \(L\). Then \(h' \in \FP\) by definition and we can translate \(h'\)-proofs with \(h'\) in polynomial time into \(h\)-proofs, in formulas
     \[
-      h(h'(w)) = h(w).
+      h(h'(w)) = h'(w).
     \]
     Therefore, \(h\) simulates every proof system \(h'\).
   \end{proof}
 
-  One basic lemma that is widely used establishes a connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. \cite{KMT03}.
+  One basic lemma that is widely used formalizes a part the connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. \cite{KMT03}.
 
-  \begin{lemma}
+  \begin{lemma} \label{lemManyOneProofSystem}
     If \(A\) has a (p-)optimal proof system and if \(B \redmany A\), then \(B\) has a (p-)optimal proof system, too.
   \end{lemma}
 
@@ -53,16 +53,17 @@
     This implies \(h'(\langle g'(w), t(1w) \rangle ) = g'(w)\). Hence, \(h'\) p-simulates \(g'\).
   \end{proof}
 
-  A main motivation to study proof systems is given by the following theorem \cite{KMT03}.
+  A main motivation to study proof systems is given by the following theorem, as it connections optimal proof systems to the important question of separating complexity classes \cite{KMT03}.
 
   \begin{theorem}
    \(\NP = \coNP\) if and only if a polynomial bounded proof system for \(\TAUT\) exists.
   \end{theorem}
 
-  According to Köbler et al., one tried to separate \(\NP\) from \(\coNP\) by studying more and more powerful proof systems, showing that they are not polynomially bounded \cite{KMT03}.
+  According to Köbler et al., one tried to separate \(\NP\) from \(\coNP\) by studying more and more powerful proof systems, showing that they are not polynomially bounded \cite{KMT03}. \TODO{improve!}
 
   % results that could be included
   % - theorem 22 BKM09
+  % - theorem 1.2 KMT03
 
 
 
