@@ -4,23 +4,44 @@
   \TODO{tell some history of this question \cite[p. 1]{KM00}}The following lemma gives a partial answer to the question what languages do have optimal proof systems.
 
   \begin{lemma}
-   Every language in \(\P \cup \NP\) has a optimal proof system.
+   \begin{enumerate}[(i)]
+    \item Every language in \(\P\) has a p-optimal proof system.
+    \item Every language in \(\NP\) has an optimal proof system.
+   \end{enumerate}
   \end{lemma}
 
   \begin{proof}
-    Let \(L \in \P \cup \NP\). Then there is a function \(f \in \FP\) with \(f(w) = 1 \Leftrightarrow w \in L\). To show there is a proof system, let \(h\) be defined by
-    \[
-      h(w) =
-      \begin{cases}
-        w & (f(w) = 1), \\
-        \perp & (\text{otherwise}). \\
-      \end{cases}
-    \]
-    Then \(h\) is a proof system for \(L\). To show \(h\) is optimal, let \(h'\) be a arbitrary proof system for \(L\). Then \(h' \in \FP\) by definition and we can translate \(h'\)-proofs with \(h'\) in polynomial time into \(h\)-proofs, in formulas
-    \[
-      h(h'(w)) = h'(w).
-    \]
-    Therefore, \(h\) simulates every proof system \(h'\).
+    \begin{enumerate}[(i)]
+      \item 
+        Let \(L \in \P\). Then there is a function \(f \in \FP\) with \(f(w) = 1 \Leftrightarrow w \in L\). To show there is a proof system, let \(h\) be defined by
+        \[
+          h(w) =
+          \begin{cases}
+            w & (f(w) = 1), \\
+            \perp & (\text{otherwise}). \\
+          \end{cases}
+        \]
+        Then \(h\) is a proof system for \(L\). To show \(h\) is optimal, let \(h'\) be an arbitrary proof system for \(L\). Then \(h' \in \FP\) by definition and we can translate \(h'\)-proofs with \(h'\) in polynomial time into \(h\)-proofs, in formulas
+        \[
+          h(h'(w)) = h'(w).
+        \]
+        Therefore, \(h\) p-simulates every proof system \(h'\).
+      \item
+        Let \(L \in \NP\). Then there is a nondeterministic Turing transducer \(M\) deciding \(L\) in polynomial time. Let \(f_i(x) \in \FP\) the function calculating the \(i\)-th path of the nondeterministic calculation of \(M\). Finally, let \(h\) be defined by
+        \[
+          h(\langle i, w \rangle) =
+          \begin{cases}
+            f_i(w) & (f_i(w) \text{ accepts}), \\
+            \perp & (\text{otherwise}). \\
+          \end{cases}
+        \]
+        Then \(h \in \FP\) is a proof system for \(L\). To show \(h\) is optimal, let \(h'\) be an arbitrary proof system for \(L\). Let \(g\) be a function that maps an \(w \in L\) to an \(i\) such that \(f_i(w)\) accepts in polynomial time. Notice that \(g\) may be not in \(\FP\). With these definitions, we obtain
+        \[
+          h(\langle g(h'(w)), h'(w) \rangle) = h'(w).
+        \]
+        Therefore, \(h\) simulates every proof system \(h'\) via the translating function
+          \[w \mapsto \langle g(h'(w)), h'(w) \rangle.\]
+    \end{enumerate}
   \end{proof}
 
   One basic lemma that is widely used formalizes a part the connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. \cite{KMT03}.
