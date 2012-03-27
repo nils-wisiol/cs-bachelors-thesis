@@ -1,7 +1,39 @@
-\chapter{A brief Overview of Proof Systems}
-  After defining the important notions for this thesis, we will give a brief overview of the most important results in the field of optimal proof systems.
+\chapter{A brief Overview of Proof Systems} \label{chpOverview}
+  After defining the important notions for this thesis, we will give a brief overview of some important results in the field of optimal proof systems.
 
-  \TODO{tell some history of this question \cite[p. 1]{KM00}}The following lemma gives a partial answer to the question what languages do have optimal proof systems.
+  One basic lemma that is widely used formalizes a part of the connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. \cite{KMT03}.
+
+  \begin{lemma} \label{lemManyOneProofSystem}
+    If \(A\) has a (p-)optimal proof system and if \(B \redmany A\), then \(B\) has a (p-)optimal proof system, too.
+  \end{lemma}
+
+  \begin{proof}
+    Let \(h\) be a p-optimal proof system for \(A\) and let \(B\) many-one reduce to \(A\) via \(f \in \FP\), that is \(x \in B \Leftrightarrow f(x) \in A\). Then \(h'\) defined by
+      \[
+        h'(\langle x, w \rangle) =
+        \begin{cases}
+          x & (h(w) = f(x)), \\
+          \perp & (\text{otherwise}), \\
+        \end{cases}
+      \]
+    is a proof system for \(B\), as \(h(w) = f(x) \in A\) is equivalent to \(x \in B\). To show \(h'\) is optimal, let \(g'\) be a proof system for \(B\). In order to obtain a proof system for \(A\), let \(g\) be
+      \[
+        g(bw) =
+        \begin{cases}
+          h(w) & (b = 0), \\
+          f(g'(w)) & (b = 1). \\
+        \end{cases}
+      \]
+    Since both \(h(w)\) and \(f(g'(w))\) are in \(A\) and \(h\) is a proof system for \(A\), \(g\) is also a proof system for \(A\). As \(h\) is p-optimal, there is a function \(t \in \FP\) translating \(g\)-proofs to \(h\)-proofs implying that
+    \[
+      h(t(1w)) = g(1w) = f(g'(w)).
+    \]
+    This implies \(h'(\langle g'(w), t(1w) \rangle ) = g'(w)\). Hence, \(h'\) p-simulates \(g'\).
+  \end{proof}
+
+  In contraposition to this, we can state that for \(B \redmany A\), if \(B\) has no (p-)optimal proof system, then \(A\) has not either.
+
+  \TODO{tell some history of this question \cite[p. 1]{KM00}}The following lemma gives a partial answer to the basic question what languages do have optimal proof systems.
 
   \begin{lemma}
    \begin{enumerate}[(i)]
@@ -44,37 +76,13 @@
     \end{enumerate}
   \end{proof}
 
-  One basic lemma that is widely used formalizes a part the connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. \cite{KMT03}.
+  This implies \(\NP \subseteq \OPT\). By stating different properties for \(\P\) and \(\NP\), the lemma connects to the \(\P\)-\(\NP\)-question. If one would find a set in \(\NP\) without an p-optimal proof system, one would have separated \(\P\) from \(\NP\).
 
-  \begin{lemma} \label{lemManyOneProofSystem}
-    If \(A\) has a (p-)optimal proof system and if \(B \redmany A\), then \(B\) has a (p-)optimal proof system, too.
-  \end{lemma}
-
-  \begin{proof}
-    Let \(h\) be a p-optimal proof system for \(A\) and let \(B\) many-one reduce to \(A\) via \(f \in \FP\), that is \(x \in B \Leftrightarrow f(x) \in A\). Then \(h'\) defined by
-      \[ 
-        h'(\langle x, w \rangle) =
-        \begin{cases}
-          x & (h(w) = f(x)), \\
-          \perp & (\text{otherwise}), \\
-        \end{cases}
-      \]
-    is a proof system for \(B\), as \(h(w) = f(x) \in A\) is equivalent to \(x \in B\). To show \(h'\) is optimal, let \(g'\) be a proof system for \(B\). In order to obtain a proof system for \(A\), let \(g\) be
-      \[
-        g(bw) =
-        \begin{cases}
-          h(w) & (b = 0), \\
-          f(g'(w)) & (b = 1). \\
-        \end{cases}
-      \]
-    Since both \(h(w)\) and \(f(g'(w))\) are in \(A\) and \(h\) is a proof system for \(A\), \(g\) is also a proof system for \(A\). As \(h\) is p-optimal, there is a function \(t \in \FP\) translating \(g\)-proofs to \(h\)-proofs implying that
-    \[
-      h(t(1w)) = g(1w) = f(g'(w)).
-    \]
-    This implies \(h'(\langle g'(w), t(1w) \rangle ) = g'(w)\). Hence, \(h'\) p-simulates \(g'\).
-  \end{proof}
-
-  A main motivation to study proof systems is given by the following theorem, as it connections optimal proof systems to the important question of separating complexity classes \cite{KMT03}.
+  \begin{corollary}
+    If there is no p-optimal proof system for \(\SAT\), then \(\P \neq \NP\).
+  \end{corollary}  
+  
+  A main motivation to study proof systems is given by the following theorem, as it connections optimal proof systems further to the important question of separating complexity classes \cite{KMT03}.
 
   \begin{theorem}
    \(\NP = \coNP\) if and only if a polynomial bounded proof system for \(\TAUT\) exists.
