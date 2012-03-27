@@ -1,10 +1,10 @@
 \chapter{Preliminaries}
   As mentioned before, we will first introduce important symbols and definitions. Although some familiarity with standard notions of complexity theory is assumed, we will here define most of the notions used in this thesis. For the most important ones, we will give a short discussion.
 
-  Let \(\Sigma = \{ 0, 1 \}\) denote the alphabet. The output of a Turing transducer \(M\) on input \(x \in \Sigma^*\) is denoted by \(M(x)\). If the transducer \(M\) does not accept or runs forever on input \(x\), we define \(M(x) = \perp\). We say a Turing transducer \defNotion{calculates} a partial function \(f\), if \(M(x) = f(x)\) for all \(x \in \Sigma^*\). We further define \(\runtime_M(x)\) as the number of steps the transducer \(M\) runs on input \(x \in \Sigma^*\). Similar, for a partial function \(f\), we define \(\runtime_f(x) = \runtime_M(x)\) for a transducer \(M\) calculating \(f\). \TODO{is that well-defined?} With \(\FP\), we denote the set of all partial functions \(f\) with \(\runtime_f(x) \leq p(|x|)\) for a polynomial \(p\).
+  Let \(\Sigma = \{ 0, 1 \}\) denote the alphabet. The output of a Turing transducer \(M\) on input \(x \in \Sigma^*\) is denoted by \(M(x)\). If the transducer \(M\) does not accept or runs forever on input \(x\), we define \(M(x) = \perp\). We say a Turing transducer \defNotion{calculates} a partial function \(f\), if \(M(x) = f(x)\) for all \(x \in \Sigma^*\). We further define \(\runtime_M(x)\) as the number of steps the transducer \(M\) runs on input \(x \in \Sigma^*\). Similar, for a partial function \(f\), we define \(\runtime_f(x) = \runtime_M(x)\) for a transducer \(M\) calculating \(f\). \TODO{is that well-defined?} With \(\FP\) we denote the set of all partial functions \(f\) with \(\runtime_f(x) \leq p(|x|)\) for a polynomial \(p\).
 
   \begin{definition}
-    A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \defNotion{\(h\)-proof} for \(x\).
+    A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \defNotion{\(h\)-proof} for \(x\). \(f\) is called an \defNotion{polynomially bounded} proof system, if there is a polynomial \(p\) such that for every \(x \in L\), there is a \(h\)-proof \(w\) with \(|w| \leq q(|x|)\).
   \end{definition}
 
   With this definition, a proof system for \(L\) is basically a polynomial-time bounded function that enumerates \(L\). Notice, although its time bound against the input, the shortest proof a string \(w \in L\) can be be very long. To give an example, let \(h\) be defined by
@@ -15,9 +15,9 @@
          \perp & (\text{otherwise}). \\
        \end{cases}
     \]
-  Then \(h\) is a proof system for \(\SAT\). Is is an open question, whether \(sat\) is p-optimal. Köbler and Messner showed, that this question is equivalent to a variety of well studied complexity theoretic assumptions \cite{KM00}. We will cite some of their results in lemma/chapter \TODO{well, where?}.
+  Then \(h\) is a proof system for \(\SAT\). It is an open question, whether \(sat\) is p-optimal. Köbler and Messner showed, that this question is equivalent to a variety of well studied complexity theoretic assumptions \cite{KM00}. We will cite some of their results in lemma/chapter \TODO{well, where?}.
 
-  There may be various proof systems for a language \(L\). In order to make them comparable, we define the notion of \defNotion{simulation} of proof systems. It turns out that they have a similar role as complete problems have \cite{KM00}. 
+  There may be various proof systems for a language \(L\). In order to make them comparable, we define the notion of \defNotion{simulation} of proof systems. It turns out that the notion of simulation corresponds in a certain way with the notion of many-one reducibility \cite{KM00}. In the following definitions, we will keep this correspondence.
   
   \begin{definition}
     Let \(h\) and \(h'\) be proof systems for a language \(L\). If there is a polynomial \(p\) and a function \(f\) such that for all \(w \in \Sigma^*\)
@@ -27,19 +27,21 @@
     and \(|f(w)| \leq p(|w|)\), then \(h\) \defNotion{simulates} \(h'\).
   \end{definition}
 
-  Speaking informally, \(f\) translates \(h\)-proof in \(h'\) and keeps the proofs polynomial length bounded. As this definition corresponds to the definition of complete problems in respect of many-one-reducibility, the existence of optimal proof systems is connected with the existence of complete problems, as we will see in lemma/chapter \ref{xx} \cite{KMT03}. In the given definition, \(f\) could be hard or even impossible to calculate. Hence we define a stronger version of this notion, demanding \(f \in \FP\).
+  Speaking informally, \(f\) translates \(h\)-proofs into \(h'\)-roofs and keeps them polynomial length bounded. In the given definition, \(f\) could be hard or even impossible to calculate. Hence we define a stronger version of this notion, demanding \(f \in \FP\).
 
   \begin{definition}
    Again, let \(h\) and \(h'\) be proof systems for a language \(L\). If \(h\) simulates \(h'\) with a function \(f\) and additionally \(f \in \FP\), \(h\) \defNotion{p-simulates} \(h'\).
   \end{definition}
 
-  Notice, if \(f\) is a function that can be calculated in polynomial time \(p\), then we obtain \(|f(w)| \leq p(|w|)\) as required in the definition of simulation. With a proof system p-simulating another, we can obtain the polynomial short proof mentioned above in polynomial short time. With the notion of simulation of proof systems, we can compare different proof systems for a language \(L\). With respect to these notions, we will define a notion of the best proof system as follows.
+  Notice, if \(f\) is a function that can be calculated in polynomial time \(p\), then we obtain \(|f(w)| \leq p(|w|)\) as required in the definition of simulation. With a proof system p-simulating another, we can translate proofs as above in polynomial short time. With the notion of simulation of proof systems, we can compare different proof systems for a language \(L\). With respect to these notions, we will define a notion of the best proof system as follows.
 
   \begin{definition}
     A proof system \(h\) for \(L\) is called \defNotion{optimal}, if it simulates every proof system for \(L\). It is called \defNotion{p-optimal}, if it p-simulates every proof system for \(L\).
   \end{definition}
 
-  The existence of a optimal proof system for a arbitrary language \(L\) is an important complexity theoretic question. For languages in \(\P\) and \(\NP\), there is always a optimal proof system, as we will see in \TODO{cite!}. For super-polynomial time complexity classes, there are languages without an optimal proof system, as we will show in chapter \ref{chpConexpMinusOpt}. For that reason, we will define a complexity class containing all languages possessing an optimal proof system.
+  Like noted above, this definition corresponds with the definition of complete problems in respect of many-one-reducibility. We will investigate further on the connection between complete problems and optimal proof systems later in lemma/chapter \ref{xx} \cite{KMT03}.
+
+  The existence of optimal proof systems for a arbitrary language \(L\) is an important complexity theoretic question. For languages in \(\P\) and \(\NP\), there is always a optimal proof system, as we will see in \ref{lemPHasOptimalProofSystem}. For super-polynomial time complexity classes, there are languages without an optimal proof system, as we will show in chapter \ref{chpConexpMinusOpt}. For that reason, we will define a complexity class containing all languages possessing an optimal proof system.
 
   \begin{definition}
     Let \defNotion{\(\OPT\)} be the complexity class of all languages that have a optimal proof system.
