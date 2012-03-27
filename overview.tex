@@ -74,6 +74,7 @@
         Therefore, \(h\) simulates every proof system \(h'\) via the translating function
           \[w \mapsto \langle g(h'(w)), h'(w) \rangle.\]
     \end{enumerate}
+    \TODO{proof for ``optimal'' is missing}
   \end{proof}
 
   This implies \(\NP \subseteq \OPT\). By stating different properties for \(\P\) and \(\NP\), the lemma connects to the \(\P\)-\(\NP\)-question. If one would find a set in \(\NP\) without an p-optimal proof system, one would have separated \(\P\) from \(\NP\).
@@ -82,18 +83,18 @@
     If there is no p-optimal proof system for \(\SAT\), then \(\P \neq \NP\).
   \end{corollary}  
   
-  In order to prove proposition \ref{prpNPcoNP}, we will show two lemma of which the first is taken from the work of Cook and Reckhow \cite{CR79}. It gives a equivalent formulation of the question whether \(\NP = \coNP\).
+  In order to prove proposition \ref{prpNPcoNP}, we will show two lemma of which the first is taken from the work of Cook and Reckhow \cite{CR79}. It gives an equivalent formulation of the question whether \(\NP = \coNP\).
 
   \begin{lemma} \label{lemNPisCoNP}
    \(\NP = \coNP\) if and only if \(\TAUT \in \NP\).
   \end{lemma}
 
   \begin{proof}
-    Using a nondeterministic Turing transducer, we can show that an arbitrary formula is not a tautology in polynomial time by guessing and verifying an assignment for which the formula is falsified. Thus, \(\overline{\TAUT} \in \NP\).
+    Without further assumptions, we can show by using a nondeterministic Turing transducer, that an arbitrary formula is not a tautology in polynomial time by guessing and verifying an assignment for which the formula is falsified. Thus, \(\overline{\TAUT} \in \NP\).
 
-    Assume \(\TAUT \in \NP\), and let \(L\) be an arbitrary language with \(L \in \NP\). \TODO{insert part of the proof of theorem 1 from \cite{C71}.} Hence, there is a function \(f \in \FP\) such that \(x \in L \Leftrightarrow f(x) \in \overline{\TAUT}\) respectively \(x \in \overline{L} \Leftrightarrow f(x) \in \TAUT\). Since \(\TAUT \in \NP\), for any given \(x \in \Sigma^*\) we can in nondeterministic polynomial time decide whether \(f(x)\) is in \(\TAUT\). Thus we also can decide in nondeterministic polynomial time whether \(x \in \overline{L}\). It follows that \(\overline{L} \in \NP\). As this proves that \(\NP\) is closed under complement, we obtain \(\NP \subseteq \coNP\). So see that \(\coNP \subseteq \NP\), let an arbitrary language \(\overline{L}\) be in \(\coNP\). By definition we obtain \(L \in \NP\). As \(\NP\) is closed under complement, \(\overline{L} \in \NP\). Thus, \(\coNP \subseteq \NP\).
+    Assume \(\TAUT \in \NP\), and let \(L\) be an arbitrary language with \(L \in \NP\). \TODO{insert part of the proof of theorem 1 from \cite{C71}.} Hence, there is a function \(f \in \FP\) such that \(x \in L \Leftrightarrow f(x) \in \overline{\TAUT}\) respectively \(x \in \overline{L} \Leftrightarrow f(x) \in \TAUT\). Since \(\TAUT \in \NP\), for any given \(x \in \Sigma^*\) we can in nondeterministic polynomial time decide whether \(f(x)\) is in \(\TAUT\). Thus we also can decide in nondeterministic polynomial time whether \(x \in \overline{L}\), as \(f \in \FP\). It follows that \(\overline{L} \in \NP\). As this proves that \(\NP\) is closed under complement, we obtain \(\NP \subseteq \coNP\). So see that \(\coNP \subseteq \NP\), let an arbitrary language \(\overline{L}\) be in \(\coNP\). By definition we obtain \(L \in \NP\). As \(\NP\) is closed under complement, \(\overline{L} \in \NP\). Thus, \(\coNP \subseteq \NP\).
 
-    Assume \(\TAUT \notin \NP\). As we have seen above, \(\overline{\TAUT} \in \NP\). Hence \(\NP \neq \coNP\).
+    Assume \(\TAUT \notin \NP\), then \(\overline{\TAUT} \notin \coNP\). As we have seen above, \(\overline{\TAUT} \in \NP\). Hence \(\NP \neq \coNP\).
   \end{proof}
 
   The second lemma connects with the theory of proof systems by formulating a necessary and sufficient condition for a language being in \(\NP\) \cite{CR79}.
@@ -122,7 +123,7 @@
   \]
   Using this theorem, one tried to seperate \(\NP\) from \(\coNP\) by studying more and more powerful proof systems, showing that they are not polynomially bounded \cite{KMT03}. As mentioned before, there was no success on answering this questions until now. To take the notion of optimal proof systems into account, one could ask if there is an optimal or even p-optimal proof system for \(\TAUT\). If that were the case, then the existence of one specific proof system that is not polynomially bounded would suffice to proof that \(\NP \neq \coNP\) and hence \(\P \neq \NP\) \cite{KMT03}.
 
-  Kraj\'{\i}cek and Pudl{\'a}k proved a sufficient condition for the existence of optimal proof systems for \(\TAUT\).
+  Kraj\'{\i}cek and Pudl{\'a}k proved a sufficient condition for the existence of optimal proof systems for \(\TAUT\) \cite{KP89}.
 
   \begin{theorem}
     If \(\NE = \coNE\) then optimal proof systems for \(\TAUT\) exist. If \(\E = \NE\) then p-optimal proof systems for \(\TAUT\) exists.
