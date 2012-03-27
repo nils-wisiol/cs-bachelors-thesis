@@ -1,15 +1,21 @@
 \chapter{Introduction}
-  After Cook asked 1971 the \(\P\) versus \(\NP\) question \cite{C71}, he gave the main motivation to study proof systems in 1979. Reckhow and Cook showed in their article the close relation between the separation of complexity classes and the existence of polynomially bounded proof systems \cite{CR79}.
+  After Cook stated 1971 the \(\P\) versus \(\NP\) question \cite{C71}, he gave the main motivation to study proof systems in 1979. Cook and Reckhow showed in their article the close relation between the separation of complexity classes and the existence of polynomially bounded proof systems \cite{CR79}.
 
-  Despite its importance, at the time of writing, the \(\P\) versus \(\NP\) questions remains still open. While most theoreticians assume that \(\P \neq \NP\), their equality would have many implications. Informally speaking, \(\P = \NP\) means that for every problem that has a efficiently verifiable solution, we can find that solution efficiently as well. As a consequence, public-key cryptography, the ability to send secure messages without privately exchanging keys, would be impossible. The small lock in one's browser beside the URL could not indicate a secure connection anymore \cite{F09}.
+  Despite its importance, the \(\P\) versus \(\NP\) question remains still open. Informally speaking, \(\P = \NP\) means that for every problem that has a efficiently verifiable solution, we can find that solution efficiently as well. While most theoreticians assume that \(\P \neq \NP\), their equality would have heavy implications. One consequence affects the security of communication in the Internet, as public-key cryptography depends an the existence of certain problems in \(\NP\) that are not efficiently to decide. If there are no problems with solutions fast to verify but hard to find, as \(\P = \NP\) would imply, the small lock beside the URL in one's browser could not indicate a secure communication anymore \cite{F09}.
 
-  \(\P = \NP\) would also have fundamental implications on mathematics: By using a computer, one could determine efficiently whether a given proposition has a proof of a certain length within a given theory \cite{CR79}.
+  \(\P = \NP\) would also have fundamental implications on mathematics: As mathematical proofs must by definition be efficiently verifiable, \(\P = \NP\) would imply that they are efficiently to find \cite{CR79}. This argument to believe that \(\P \neq \NP\) is further illustrated in the following quotation, taken from Aaronsons Blog\footnote{\url{http://www.scottaaronson.com/blog/}}.
 
-  The question if \(\NP = \coNP\) is closely related to the \(\P\) versus \(\NP\) problem. If \(\P = \NP\), then \(\NP = \coNP\), since \(\P\) is closed under complement. In return, if one can separate \(\NP\) from \(\coNP\), then \(\P \neq \NP\). To connect the field of proof systems with the \(\P\) versus \(\NP\) questions, we state
+  \begin{quotation}
+    ``If \(\P=\NP\), then the world would be a profoundly different place than we usually assume it to be. There would be no special value in `creative leaps', no fundamental gap between solving a problem and recognizing the solution once it's found. Everyone who could appreciate a symphony would be Mozart; everyone who could follow a step-by-step argument would be Gauss; everyone who could recognize a good investment strategy would be Warren Buffett.``
+  \end{quotation}
+
+  Closely related to the \(\P\) versus \(\NP\) problem is the question if \(\NP = \coNP\). If \(\P = \NP\), then \(\NP = \coNP\), since \(\P\) is closed under complement. In return, if one can separate \(\NP\) from \(\coNP\), then \(\P \neq \NP\). To connect the field of proof systems with the \(\P\) versus \(\NP\) questions, we state
 
   \begin{proposition}[\cite{KMT03}, \cite{CR79}] \label{prpNPcoNP}
     \(\NP\) = \(\coNP\) if and only if a polynomially bounded proof systems for \(\TAUT\) exists.
   \end{proposition}
 
-  To get insight into the field of proof systems, we will first define the notions used in the following chapter. Subsequently, we will give an overview of important results about proof systems in chapter \ref{chpOverview}. In this chapter, we will also proof proposition \ref{prpNPcoNP}. After this, we will show the existence of languages without optimal proof systems in certain complexity classes. Finally, we will give a conclusion and look forward to currently unresolved problems and further questions.
+  Which we will prove in chapter \ref{chpOverview}.
+  
+  To get insight into the field of proof systems, we will first define the notions used in the following chapter. Subsequently, we will give an overview of important results about proof systems in chapter \ref{chpOverview}. In this chapter, we will also proof proposition \ref{prpNPcoNP}. After this, we will show the existence of languages without optimal proof systems in certain complexity classes. Finally, we will give a conclusion and look forward to currently unresolved problems and further questions. \TODO{this paragraph should be much longer}
 
