@@ -7,7 +7,7 @@
     A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \defNotion{\(h\)-proof} for \(x\). \(f\) is called an \defNotion{polynomially bounded} proof system, if there is a polynomial \(p\) such that for every \(x \in L\), there is a \(h\)-proof \(w\) with \(|w| \leq q(|x|)\).
   \end{definition}
 
-  With this definition, a proof system for \(L\) is basically a polynomial-time bounded function that enumerates \(L\). Notice, although its time bound against the input, the shortest proof a string \(w \in L\) can be be very long. To give an example, let \(h\) be defined by
+  With this definition, a proof system for \(L\) is basically a polynomial-time bounded function that enumerates \(L\). Notice, although its time bound against the input, the shortest proof of a string \(w \in L\) can be be very long. To give an example, let \(h\) be defined by
     \[
        sat(x) =
        \begin{cases}
@@ -27,7 +27,7 @@
     and \(|f(w)| \leq p(|w|)\), then \(h\) \defNotion{simulates} \(h'\).
   \end{definition}
 
-  Speaking informally, \(f\) translates \(h\)-proofs into \(h'\)-roofs and keeps them polynomial length bounded. In the given definition, \(f\) could be hard or even impossible to calculate. Hence we define a stronger version of this notion, demanding \(f \in \FP\).
+  Informally speaking, \(f\) translates \(h\)-proofs into \(h'\)-proofs and keeps them polynomial length bounded. In the given definition, \(f\) could be hard or even impossible to calculate. Hence we define a stronger version of this notion, demanding \(f \in \FP\).
 
   \begin{definition}
    Again, let \(h\) and \(h'\) be proof systems for a language \(L\). If \(h\) simulates \(h'\) with a function \(f\) and additionally \(f \in \FP\), \(h\) \defNotion{p-simulates} \(h'\).

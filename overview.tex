@@ -1,9 +1,9 @@
 \chapter{A brief Overview of Proof Systems} \label{chpOverview}
   After defining the important notions for this thesis, we will give a brief overview of some important results in the field of optimal proof systems.
 
-  One basic lemma that is widely used formalizes a part of the connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. \cite{KMT03}.
+  One basic lemma that is widely used formalizes a part of the connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. We will omit the proof for optimal proof system, as it easily follows from the proof for p-optimal ones.
 
-  \begin{lemma} \label{lemManyOneProofSystem}
+  \begin{lemma}[\cite{KMT03}] \label{lemManyOneProofSystem}
     If \(A\) has a (p-)optimal proof system and if \(B \redmany A\), then \(B\) has a (p-)optimal proof system, too.
   \end{lemma}
 
@@ -33,9 +33,9 @@
 
   In contraposition to this, we can state that for \(B \redmany A\), if \(B\) has no (p-)optimal proof system, then \(A\) has not either.
 
-  \TODO{tell some history of this question \cite[p. 1]{KM00}}The following lemma gives a partial answer to the basic question what languages do have optimal proof systems.
+  \TODO{tell some history of this question \cite[p. 1]{KM00}}The following lemma gives a partial answer to the basic question what languages do have optimal proof systems. Although Koebler et al. omitted the proof of the following theorem due to its straightforwardness, we will give a proof for the purpose of this thesis.
 
-  \begin{lemma} \label{lemPHasOptimalProofSystem}
+  \begin{lemma}[\cite{KMT03}] \label{lemPHasOptimalProofSystem}
    \begin{enumerate}[(i)]
     \item Every language in \(\P\) has a p-optimal proof system.
     \item Every language in \(\NP\) has an optimal proof system.
@@ -59,7 +59,7 @@
         \]
         Therefore, \(h\) p-simulates every proof system \(h'\).
       \item
-        Let \(L \in \NP\). Then there is a nondeterministic Turing transducer \(M\) deciding \(L\) in polynomial time. Let \(f_i(x) \in \FP\) the function calculating the \(i\)-th path of the nondeterministic calculation of \(M\). Finally, let \(h\) be defined by
+        Let \(L \in \NP\). Then there is a nondeterministic Turing transducer \(M\) deciding \(L\) in polynomial time. Let \(f_i(x) \in \FP\) be the function calculating the \(i\)-th path of the nondeterministic calculation of \(M\). Finally, let \(h\) be defined by
         \[
           h(\langle i, w \rangle) =
           \begin{cases}
@@ -74,7 +74,6 @@
         Therefore, \(h\) simulates every proof system \(h'\) via the translating function
           \[w \mapsto \langle g(h'(w)), h'(w) \rangle.\]
     \end{enumerate}
-    \TODO{proof for ``optimal'' is missing}
   \end{proof}
 
   This implies \(\NP \subseteq \OPT\). By stating different properties for \(\P\) and \(\NP\), the lemma connects to the \(\P\)-\(\NP\)-question. If one would find a set in \(\NP\) without an p-optimal proof system, one would have separated \(\P\) from \(\NP\).
@@ -83,7 +82,7 @@
     If there is no p-optimal proof system for \(\SAT\), then \(\P \neq \NP\).
   \end{corollary}  
   
-  In order to prove proposition \ref{prpNPcoNP}, we will show two lemma of which the first is taken from the work of Cook and Reckhow \cite{CR79}. It gives an equivalent formulation of the question whether \(\NP = \coNP\).
+  In order to prove proposition \ref{prpNPcoNP}, we will show two lemmata of which the first is taken from the work of Cook and Reckhow \cite{CR79}. It gives an equivalent formulation of the question whether \(\NP = \coNP\).
 
   \begin{lemma} \label{lemNPisCoNP}
    \(\NP = \coNP\) if and only if \(\TAUT \in \NP\).
@@ -92,7 +91,9 @@
   \begin{proof}
     Without further assumptions, we can show by using a nondeterministic Turing transducer, that an arbitrary formula is not a tautology in polynomial time by guessing and verifying an assignment for which the formula is falsified. Thus, \(\overline{\TAUT} \in \NP\).
 
-    Assume \(\TAUT \in \NP\), and let \(L\) be an arbitrary language with \(L \in \NP\). \TODO{insert part of the proof of theorem 1 from \cite{C71}.} Hence, there is a function \(f \in \FP\) such that \(x \in L \Leftrightarrow f(x) \in \overline{\TAUT}\) respectively \(x \in \overline{L} \Leftrightarrow f(x) \in \TAUT\). Since \(\TAUT \in \NP\), for any given \(x \in \Sigma^*\) we can in nondeterministic polynomial time decide whether \(f(x)\) is in \(\TAUT\). Thus we also can decide in nondeterministic polynomial time whether \(x \in \overline{L}\), as \(f \in \FP\). It follows that \(\overline{L} \in \NP\). As this proves that \(\NP\) is closed under complement, we obtain \(\NP \subseteq \coNP\). So see that \(\coNP \subseteq \NP\), let an arbitrary language \(\overline{L}\) be in \(\coNP\). By definition we obtain \(L \in \NP\). As \(\NP\) is closed under complement, \(\overline{L} \in \NP\). Thus, \(\coNP \subseteq \NP\).
+    For every \(L \in \NP\), there is a function \(f \in \FP\) such that \(x \in L \Leftrightarrow f(x) \in \overline{\TAUT}\). We will show this as follows. As \(\SAT\) is \(\redmany\)-complete for \(\NP\), we can reduce every \(L \in \NP\) and obtain an \(f' \in \FP\) with \(x \in L \Leftrightarrow f'(x) \in \SAT\). Hence, there is a truth assignment for \(f'(x)\) such that \(f'(x)\) yields true. By negating, we obtain the existence of a truth assignment such that \(\neg f'(x)\) is false. Consequently, \(\neg f'(x) \in \overline{\TAUT}\). Notice that the negation of \(f'(x)\) can be done efficiently. By choosing \(f(x) = \neg f'(x)\), we obtain \(f \in \FP\) with the stated properties.
+
+    Assume \(\TAUT \in \NP\), and let \(L\) be an arbitrary language with \(L \in \NP\). As shown above, there is a function \(f \in \FP\) such that \(x \in L \Leftrightarrow f(x) \in \overline{\TAUT}\) respectively \(x \in \overline{L} \Leftrightarrow f(x) \in \TAUT\). Since \(\TAUT \in \NP\), for any given \(x \in \Sigma^*\) we can in nondeterministic polynomial time decide whether \(f(x)\) is in \(\TAUT\). Thus we also can decide in nondeterministic polynomial time whether \(x \in \overline{L}\), as \(f \in \FP\). It follows that \(\overline{L} \in \NP\). As this proves that \(\NP\) is closed under complement, we obtain \(\NP \subseteq \coNP\). To see that \(\coNP \subseteq \NP\), let an arbitrary language \(\overline{L}\) be in \(\coNP\). By definition we obtain \(L \in \NP\). As \(\NP\) is closed under complement, \(\overline{L} \in \NP\). Thus, \(\coNP \subseteq \NP\).
 
     Assume \(\TAUT \notin \NP\), then \(\overline{\TAUT} \notin \coNP\). As we have seen above, \(\overline{\TAUT} \in \NP\). Hence \(\NP \neq \coNP\).
   \end{proof}
@@ -104,7 +105,7 @@
   \end{lemma}
 
   \begin{proof}
-   Assume \(L \in \NP\), then some nondeterministic Turing transducer \(M\) accepts \(L\) in polynomial time. Let \(f_i(x) \in \FP\) the function calculating the \(i\)-th path of the nondeterministic calculation of \(M\). We define \(f\) by
+   Assume \(L \in \NP\), then some nondeterministic Turing transducer \(M\) accepts \(L\) in polynomial time. Let \(f_i(x) \in \FP\) be the function calculating the \(i\)-th path of the nondeterministic calculation of \(M\). We define \(f\) by
    \[
      f(\langle i, x \rangle) =
      \begin{cases}
@@ -131,7 +132,7 @@
 
   We will omit their proof in this thesis, since it uses many notions of formal logics and a huge equivalence theorem not introduced here.
 
-  With these basic results, we will investigate the question whether there are languages possessing optimal proof systems outside of \(\NP\).
+  With these results, we will further investigate the question what languages possess optimal proof systems.
 
   % results that could be included
   % - theorem 22 BKM09

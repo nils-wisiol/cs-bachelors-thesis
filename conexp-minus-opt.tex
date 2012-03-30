@@ -1,13 +1,17 @@
 \chapter{A set in $\coNEXP \setminus \OPT$} \label{chpConexpMinusOpt}
-  A first step in our investigation whether \(\OPT \subseteq \NP\) is to show that for super-polynomial complexity classes there are at least some languages not possessing a optimal proof system.
+  In the main theorem of this thesis, we will show that in certain complexity classes above of \(\NP\), there are always languages that possess no optimal proof system. To formalize this, we say a function is \defNotion{time-constructible}, if there is a Turing transducer that stops on input \(n\) after \(t(n)\) steps.
   
-  \begin{theorem}
+  \begin{theorem}\label{thmMain}
     Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system.
   \end{theorem}
 
+  Notice, if for function \(f\) there is an \(n \in \IN\) with \(f(n) \geq p(n)\) for every polynomial \(p\), then there are for every polynomial \(p\) infinitely many \(n \in \IN\) for which \(f(n) \geq p(n)\) is satisfied. Otherwise, we could construct a polynomial \(q\) that is greater than \(f\) for every \(n \in \IN\). To see this, let \(p\) be a polynomial for which \(f(n) \geq p(n)\) for only finitely many \(n \in \IN\). Then we can determine the greatest difference between \(f\) and \(p\) by taking the maximum of the set \(\eta = \{ f(n) - p(n), f(n) \geq p(n) \}\). Then for the polynomial \(p'(n) = \eta + p(n) + 1\) there is no \(n\) with \(f(n) \geq p'(n)\), which contradicts the assumption that for every polynomial \(p\) there is a natural number such that \(f(n) \geq p(n)\).
+
   Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\). We will here give a proof that is based on the work of Messner, but stays in the notion of proof systems.
+
+  Before formally proofing theorem \ref{thmMain}, let us briefly discuss the main idea of the proof. As a first observation, we notice that we can enumerate all \(\FP\)-functions \(f_i\) such that \(\runtime(f_i) \leq n^i + i\). We then construct a language \(L\) by uniting languages \(L_i\). We will construct them in a way such that there are only long \(f_i\)-proofs for all strings in \(L_i\). Afterwards we assume there is an optimal proof system \(g\) for \(L\). As for every \(\FP\)-function there is a subset that has only long proofs, there is such a subset \(L_g\) for \(g\). But as it turns out we can state a proof system for \(L_g\) that has short proofs, we can combine both proof systems to a system that runs polynomial equally fast on nearly every string in \(L\), but way faster on strings in \(L_g\). Hence, \(g\) cannot be a optimal proof system.
   
-  \begin{proof}
+  \begin{proof}[Formal proof of theorem \ref{thmMain}]
     Let \(f_1, f_2, ...\) be a enumeration of all \(\FP\)-functions with \(\runtime(f_i) \leq n^i + i\). \TODO{How is that obtained?}
     For any \(i > 0\), let \(L_i\) be the regular language described by the expression \(0^i10^*\). Define
       \[ L_i' = \{ x \in L_i | \forall_{ y \in \Sigma^* } |y|^{2i} \leq t(|x|) \implies f_i(y) \neq x \}. \]
@@ -39,7 +43,7 @@
   \end{corollary}
 
   \begin{proof}
-    With \(t(n) = 2^n\), we can get an \(L \in \coNE\) that has no optimal proof system. Any \(\redmany\)-hard set \(A\) for \(\coNE\) is \(L \redmany A\). Together with the cited result we obtain, that \(A\) cannot have optimal proof system.
+    With \(t(n) = 2^n\), we can get an \(L \in \coNE\) that has no optimal proof system. Any \(\redmany\)-hard set \(A\) for \(\coNE\) is \(L \redmany A\). Together with lemma \ref{lemManyOneProofSystem} we obtain, that \(A\) cannot have optimal proof system.
   \end{proof}
 
 
