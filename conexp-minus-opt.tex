@@ -13,7 +13,7 @@
   
   \begin{proof}[Formal proof of theorem \ref{thmMain}]
     Let \(f_1, f_2, ...\) be a enumeration of all \(\FP\)-functions with \(\runtime(f_i) \leq n^i + i\).
-    We obtain this enumeration by enumerate all Turing transducers (using Gödel's enumeration) and combine each transducer with a clock that ensures a maximum runtime of \(n^i + i\) for a transducer \(M_i\).
+    We obtain this enumeration by enumerating all Turing transducers (using Gödel's enumeration) and combine each transducer with a clock that ensures a maximum runtime of \(n^i + i\) steps for a transducer \(M_i\).
     For any \(i > 0\), let \(L_i\) be the regular language described by the expression \(0^i10^*\). Define
       \[ L_i' = \{ x \in L_i | \forall_{ y \in \Sigma^* } |y|^{2i} \leq t(|x|) \implies f_i(y) \neq x \}. \]
     That is, as long as you put strings of length \(|y|^{2i} \leq t(|x|)\) into \(f_i\), you will not obtain \(x\).
