@@ -37,39 +37,29 @@
   Using the relation to many-one-hard reducible sets proofed in lemma \ref{lemManyOneProofSystem}, we obtain
 
   \begin{corollary} \label{corHardSets}
-    No set \(\redmany\)-hard for \(\coNE\) has an optimal proof system. \TODO{Is this possible for \(\coNEXP\)?}
+    No set \(\redmany\)-hard for \(\coNE\) has an optimal proof system.
   \end{corollary}
 
   \begin{proof}
     With \(t(n) = 2^n\), we can get an \(L \in \coNE\) that has no optimal proof system. Any \(\redmany\)-hard set \(A\) for \(\coNE\) is \(L \redmany A\). Together with lemma \ref{lemManyOneProofSystem} we obtain, that \(A\) cannot have optimal proof system.
   \end{proof}
 
-  Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). In \(L_R\), there are exactly \(n\) words of length \(n\). As a consequence, \(\dens_{L_R}(n) = \sum_{i=1}^n i = \frac{n^2 + n}{2}\). Hence, \(L_R\) and \(L\) are both sparse.
+  Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). In \(L_R\), there are exactly \(n\) words of length \(n\). As a consequence, \(\dens_{L_R}(n) = \sum_{i=1}^n i = \frac{n^2 + n}{2}\). Hence, \(L_R\) and \(L\) are both sparse. We can construct even less dense languages by constructing tally sets without optimal proof systems.
 
-  But, how sparse can \(L\) be, maintaining its property of not possessing a optimal proof system? We can make \(L\) even more sparse by intersecting with sparse sets. For that purpose, let \(I_k^i\) be defined by \(I_k^i = \{ x \in \Sigma^*, x = 0^*1(0^k)^i \}\). For a fixed length \(j\), in \(I_k^i\) there is exactly one string, namely \(0^{j-1-ki}1(0^k)^i\) if \(j \geq 1 + ki\). An equivalent description of this constraint is given by
-  \[
-    j \geq 1 + ki \Leftrightarrow
-    \frac{j-1}{k} \geq i \Leftrightarrow
-    \left \lfloor \frac{j-1}{k} \right \rfloor \geq i.
-  \]
-  Otherwise, there is no word of this length. Hence, the language \(I_k\) defined by \(I_k = \bigcup_{i \in \IN} I_k^i\) contains exactly \(\lfloor \frac{j-1}{k} \rfloor\) strings of length exactly \(j\). Notice \(I_k\) is the regular language \(I_k = 0^*1(0^k)^*\). We obtain an upper bound for the density of \(I_k\) as follows
-  \[
-    \dens_{I_k}(n) = \sum_{j=1}^{n} \left \lfloor \frac{j-1}{k} \right \rfloor \leq \frac{1}{k} \sum_{j=1}^n j-1 = \frac{(n-1)^2-n+1}{2k}.
-  \]
-  \TODO{improve this section}
-
-  We also can provide an tally language that has no optimal proof system, since we can convert from \(\Sigma^*\) to \(\TALLY\) in polynomial time.
-
-  \begin{corollary}
-    If \(L \in \C\) has no optimal proof system, then there is a \(T \in \C \cap \TALLY\) that has no optimal proof system.
-  \end{corollary}
+  \begin{theorem}
+    If \(L \subseteq \{ x \in \Sigma^*, x = 0^*10^* \}\) has no optimal proof system, then there is a \(T \in \TALLY\) that has no optimal proof system.
+  \end{theorem}
 
   \begin{proof}
-    Let \(t\) be a bijective function \(\Sigma^* \to \TALLY\) with \(t \in \FP\). \TODO{there is no function like that} Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a \(f \in \FP\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is a optimal proof system for \(L\), which contradicts the assumption.
+    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost \(\TALLY\)---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a \(f \in \FP\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is a optimal proof system for \(L\), which contradicts the assumption.
   \end{proof}
 
+  As with \(t \in \FP\) from this proof, we can state \(x \in L \Leftrightarrow t(x) \in T\). Hence \(L \redmany T\). As \(t\) is bijective, we further obtain \(T \redmany L\). This yields the conjecture that \(L\) as constructed in our proof is not \(\NP\)-complete. Otherwise, \(\P = \NP\) as we would have obtained an tally language that is \(\NP\)-complete.
+  
+  Using this theorem, we can further improve our results on the density of language not possessing an optimal proof system. For any tally language \(p(n) = n\) is an upper bound of its density.
+
+  \begin{corollary}
+    There is a language \(L\) with \(\dens_L(n) \leq n\) that possesses no optimal proof system.
+  \end{corollary}
 
   
-
-
-
