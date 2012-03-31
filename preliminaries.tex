@@ -1,7 +1,7 @@
 \chapter{Preliminaries}
   As mentioned before, we will first introduce important symbols and definitions. Although some familiarity with standard notions of complexity theory is assumed, we will here define most of the notions used in this thesis. For the most important ones, we will give a short discussion.
 
-  Let \(\Sigma = \{ 0, 1 \}\) denote the alphabet. The output of a Turing transducer \(M\) on input \(x \in \Sigma^*\) is denoted by \(M(x)\). If the transducer \(M\) does not accept or runs forever on input \(x\), we define \(M(x) = \perp\). We say a Turing transducer \defNotion{calculates} a partial function \(f\), if \(M(x) = f(x)\) for all \(x \in \Sigma^*\). We further define \(\runtime_M(x)\) as the number of steps the transducer \(M\) runs on input \(x \in \Sigma^*\). Similar, for a partial function \(f\), we define \(\runtime_f(x) = \runtime_M(x)\) for a transducer \(M\) calculating \(f\). \TODO{is that well-defined?} With \(\FP\) we denote the set of all partial functions \(f\) with \(\runtime_f(x) \leq p(|x|)\) for a polynomial \(p\).
+  Let \(\Sigma = \{ 0, 1 \}\) denote the alphabet. The output of a Turing transducer \(M\) on input \(x \in \Sigma^*\) is denoted by \(M(x)\). If the transducer \(M\) does not accept or runs forever on input \(x\), we define \(M(x) = \perp\). We say a Turing transducer \defNotion{calculates} a partial function \(f\), if \(M(x) = f(x)\) for all \(x \in \Sigma^*\). We further define \(\runtime_M(x)\) as the number of steps the transducer \(M\) runs on input \(x \in \Sigma^*\). With \(\FP\) we denote the set of all partial functions \(f\) for which a Turing transducer \(M\) calculating \(f\) exists such that \(\runtime_M(x) \leq p(|x|)\) for a polynomial \(p\).
 
   \begin{definition}
     A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \defNotion{\(h\)-proof} for \(x\). \(f\) is called an \defNotion{polynomially bounded} proof system, if there is a polynomial \(p\) such that for every \(x \in L\), there is a \(h\)-proof \(w\) with \(|w| \leq q(|x|)\).
@@ -15,7 +15,7 @@
          \perp & (\text{otherwise}). \\
        \end{cases}
     \]
-  Then \(h\) is a proof system for \(\SAT\). It is an open question, whether \(sat\) is p-optimal. Köbler and Messner showed, that this question is equivalent to a variety of well studied complexity theoretic assumptions \cite{KM00}. We will cite some of their results in lemma/chapter \TODO{well, where?}.
+  Then \(h\) is a proof system for \(\SAT\). It is an open question, whether \(sat\) is p-optimal. Köbler and Messner showed, that this question is equivalent to a variety of well studied complexity theoretic assumptions \cite{KM00}. We will show some of the connections in the next chapter.
 
   There may be various proof systems for a language \(L\). In order to make them comparable, we define the notion of \defNotion{simulation} of proof systems. It turns out that the notion of simulation corresponds in a certain way with the notion of many-one reducibility \cite{KM00}. In the following definitions, we will keep this correspondence.
   
