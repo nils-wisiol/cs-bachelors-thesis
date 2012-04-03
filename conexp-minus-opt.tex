@@ -48,14 +48,12 @@
   Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). In \(L_R\), there are exactly \(n\) words of length \(n\). As a consequence, \(\dens_{L_R}(n) = \sum_{i=1}^n i = \frac{n^2 + n}{2}\). Hence, \(L_R\) and \(L\) are both sparse. We can construct even less dense languages by constructing tally sets without optimal proof systems.
 
   \begin{theorem}
-    If \(L \subseteq \{ x \in \Sigma^*, x = 0^*10^* \}\) has no optimal proof system, then there is a \(T \in \TALLY\) that has no optimal proof system.
+    If \(L \subseteq \{ x \in \Sigma^*, x = 0^*10^* \}\) has no optimal proof system, then there is a \(T \in \TALLY\), that has no optimal proof system and is polynomial time equivalent to \(L\), that is \(L \redmany T\) and \(T \redmany L\).
   \end{theorem}
 
   \begin{proof}
-    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost \(\TALLY\)---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a \(f \in \FP\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is a optimal proof system for \(L\), which contradicts the assumption.
+    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost \(\TALLY\)---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a \(f \in \FP\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is a optimal proof system for \(L\), which contradicts the assumption that \(L\) has no optimal proof system. Using \(t\) we obtain \(L \redmany T\) and \(T \redmany L\).
   \end{proof}
-
-  As with \(t \in \FP\) from this proof, we can state \(x \in L \Leftrightarrow t(x) \in T\). Hence \(L \redmany T\). As \(t\) is bijective, we further obtain \(T \redmany L\). This yields the conjecture that \(L\) as constructed in our proof is not \(\NP\)-complete. Otherwise, \(\P = \NP\) as we would have obtained an tally language that is \(\NP\)-complete.
   
   Using this theorem, we can further improve our results on the density of language not possessing an optimal proof system. For any tally language \(p(n) = n\) is an upper bound of its density.
 
