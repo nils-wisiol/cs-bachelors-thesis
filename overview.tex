@@ -1,6 +1,8 @@
 \chapter{A brief Overview of Proof Systems} \label{chpOverview}
   After defining the important notions for this thesis, we will give a brief overview of some important results in the field of optimal proof systems.
 
+  \section{Proof Systems and the $\P$ versus $\NP$ question}
+  
   One basic lemma that is widely used formalizes a part of the connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. We will omit the proof for optimal proof system, as it easily follows from the proof for p-optimal ones.
 
   \begin{lemma}[\cite{KMT03}] \label{lemManyOneProofSystem}
@@ -133,6 +135,40 @@
   We will omit their proof in this thesis, since it uses many notions of formal logics and a huge equivalence theorem not introduced here.
 
   With these results, we will further investigate the question what languages possess optimal proof systems.
+
+  \section{Closure Properties of $\OPT$} \TODO{improve title}
+
+  In this section, we will investigate if languages similar to an language that is known to possess an optimal proof system also possess optimal proof systems. We will state these results here separately as they interesting by them selfs. Later, we will use them to obtain more languages not possessing an optimal proof system.
+
+  \begin{lemma}
+    Let \(L\) be a language not possessing an optimal proof system. Then \(bL = \{ w \in L : bw \}\) with a bit \(b \in \Sigma\) does not possess an optimal proof system, too. \(L\) and \(bL\) are polynomial time equivalent.
+  \end{lemma}
+
+  Although the contraposition of this lemma---if \(bL \in \OPT\), then \(L \in \OPT\)---is easier to state, we give this version as we will use the proposition on not possessing an optimal proof system later on.
+  
+  \begin{proof}
+    We will proof the contraposition. Assume \(h\) is an optimal proof system for \(bL\). Let \(g\) a function that removes the first bit of a string, that is \(g(bx) = x\). Then \(g \in \FP\). We obtain an proof system \(g \circ h\) for the language \(L\). To show that \(g \circ h\) is optimal, let \(h'\) be an arbitrary proof system for \(L\). Let \(g' \in \FP\) be the function attaching the bit \(b\) to the begin of a string, \(g'(x) = bx\). Notice that for any \(w \in bL\), we obtain \(g'(g(w)) = w\). Combining \(g'\) and \(h'\) to \(g' \circ h'\), we obtain a proof system for \(bL\). As \(h\) is optimal, there is a polynomial bounded function \(f\) with \(h(f(x)) = g'(h'(x))\). Using \(g\), we obtain \(g(h(f(x))) = g(g'(h(x))) = h(x)\). Hence, \(g \circ h\) simulates every proof system \(h\) for \(L\).
+
+    Using \(g\) respectively \(g'\), we obtain \(bL \redmany L\) respectively \(L \redmany bL\).
+  \end{proof}
+
+  Using this lemma we can obtain further languages not possessing an optimal proof system.
+
+  \begin{lemma}
+    Let \(L\) be a language not possessing an optimal proof system. Then \(0L \cup 1L\) does not possess an optimal proof system, too. \(L\) and \(0L \cup 1L\) are polynomial time equivalent.
+  \end{lemma}
+
+  \begin{proof}
+    Again, we will proof the contraposition. Assume that \(h\) is an optimal proof system for \(0L \cup 1L\). Let \(g \in \FP\) be a function mapping the first bit of any word to \(0\), that is \(g(bx) = 0x\). Then \(g \circ h\) is a proof system for \(0L\). Let \(h'\) be an arbitrary proof system for \(0L\). As \(h\) is optimal, we obtain \(h(f(x)) = h'(x)\) with a polynomial bounded \(f\). It follows that \(g(h(f(x))) = g(h'(x)) = h'(x)\) and hence \(g \circ h\) is an optimal proof system for \(0L\).
+
+    Using \(x \mapsto 0x\), we obtain \(L \redmany 0L \cup 1L\), as \(x \in L \Leftrightarrow 0x \in 0L \cup 1L\). Using \(bx \mapsto x\), we obtain \(0L \cup 1L \redmany L\), as \(bx \in 0L \cup 1L \Leftrightarrow x \in L\).
+  \end{proof}
+
+
+
+
+
+  
 
   % results that could be included
   % - theorem 22 BKM09
