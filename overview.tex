@@ -140,13 +140,13 @@
 
   In this section, we will investigate if languages similar to an language that is known to possess an optimal proof system also possess optimal proof systems. We will state these results here separately as they interesting by them selfs. Later, we will use them to obtain more languages not possessing an optimal proof system.
 
-  \begin{lemma}
+  \begin{lemma} \label{lemAddBit}
     Let \(L\) be a language not possessing an optimal proof system. Then \(bL = \{ w \in L : bw \}\) with a bit \(b \in \Sigma\) does not possess an optimal proof system, too. \(L\) and \(bL\) are polynomial time equivalent.
   \end{lemma}
 
   Although the contraposition of this lemma---if \(bL \in \OPT\), then \(L \in \OPT\)---is easier to state, we give this version as we will use the proposition on not possessing an optimal proof system later on.
   
-  \begin{proof}
+  \begin{proof} 
     We will proof the contraposition. Assume \(h\) is an optimal proof system for \(bL\). Let \(g\) a function that removes the first bit of a string, that is \(g(bx) = x\). Then \(g \in \FP\). We obtain an proof system \(g \circ h\) for the language \(L\). To show that \(g \circ h\) is optimal, let \(h'\) be an arbitrary proof system for \(L\). Let \(g' \in \FP\) be the function attaching the bit \(b\) to the begin of a string, \(g'(x) = bx\). Notice that for any \(w \in bL\), we obtain \(g'(g(w)) = w\). Combining \(g'\) and \(h'\) to \(g' \circ h'\), we obtain a proof system for \(bL\). As \(h\) is optimal, there is a polynomial bounded function \(f\) with \(h(f(x)) = g'(h'(x))\). Using \(g\), we obtain \(g(h(f(x))) = g(g'(h(x))) = h(x)\). Hence, \(g \circ h\) simulates every proof system \(h\) for \(L\).
 
     Using \(g\) respectively \(g'\), we obtain \(bL \redmany L\) respectively \(L \redmany bL\).
@@ -154,7 +154,7 @@
 
   Using this lemma we can obtain further languages not possessing an optimal proof system.
 
-  \begin{lemma}
+  \begin{lemma} \label{lemMitotic}
     Let \(L\) be a language not possessing an optimal proof system. Then \(0L \cup 1L\) does not possess an optimal proof system, too. \(L\) and \(0L \cup 1L\) are polynomial time equivalent.
   \end{lemma}
 

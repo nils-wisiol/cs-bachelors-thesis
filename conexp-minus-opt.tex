@@ -1,5 +1,7 @@
 \chapter{A set in $\coNEXP \setminus \OPT$} \label{chpConexpMinusOpt}
   In the main theorem of this thesis, we will show that in certain complexity classes above of \(\NP\), there are always languages that possess no optimal proof system. To formalize this, we say a function is \defNotion{time-constructible}, if there is a Turing transducer that stops on input \(n\) after \(t(n)\) steps.
+
+  \section{Basic Construction}
   
   \begin{theorem}\label{thmMain}
     Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system.
@@ -45,6 +47,8 @@
     With \(t(n) = 2^n\), we can get an \(L \in \coNE\) that has no optimal proof system. Any \(\redmany\)-hard set \(A\) for \(\coNE\) is \(L \redmany A\). Together with lemma \ref{lemManyOneProofSystem} we obtain, that \(A\) cannot have optimal proof system.
   \end{proof}
 
+  \section{Making the Language Tally}
+
   Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). In \(L_R\), there are exactly \(n\) words of length \(n\). As a consequence, \(\dens_{L_R}(n) = \sum_{i=1}^n i = \frac{n^2 + n}{2}\). Hence, \(L_R\) and \(L\) are both sparse. We can construct even less dense languages by constructing tally sets without optimal proof systems.
 
   \begin{theorem}
@@ -60,5 +64,23 @@
   \begin{corollary}
     There is a language \(L\) with \(\dens_L(n) \leq n\) that possesses no optimal proof system.
   \end{corollary}
+
+  \section{Super-Sparse Without Optimal Proof System}
+
+  \section{Adding Redundancy}
+
+  Given a language \(L\) not possessing an optimal proof system, we can show that there is even a mitotic language that has no optimal proof system. To show this, we mainly rely on results proven in chapter \ref{chpOverview}.
+
+  \begin{theorem}
+    If \(L\) possesses no optimal proof system, there is an polynomial time equivalent, many-one-mitotic language \(L' = 0L \cup 1L\) not possessing an optimal proof system, too.
+  \end{theorem}
+
+  \begin{proof}
+    As \(L\) has no optimal proof system, lemma \ref{lemMitotic} states that \(L' = 0L \cup 1L\) is polynomial time equivalent and does not possess an optimal proof system.
+
+    Let \(A\) be the language \(0\Sigma^*\), then \(\overline{A} = 1\Sigma^*\). We obtain \(L' \cap A = 0L\) and \(L' \cap \overline{A} = 1L\). As shown in lemma \ref{lemAddBit}, \(L\) and \(bL\) are polynomial time equivalent. Using \(0x \mapsto 1x\), \(0L\) and \(1L\) are also polynomial time equivalent. Hence, \(L'\) is many-one-mitotic.
+  \end{proof}
+
+
 
   
