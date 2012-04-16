@@ -65,7 +65,7 @@
         \[
           h(\langle i, w \rangle) =
           \begin{cases}
-            f_i(w) & (f_i(w) \text{ accepts}), \\
+            w & (f_i(w) \text{ accepts}), \\
             \perp & (\text{otherwise}). \\
           \end{cases}
         \]
@@ -159,7 +159,7 @@
   \end{lemma}
 
   \begin{proof}
-    Again, we will proof the contraposition. Assume that \(h\) is an optimal proof system for \(0L \cup 1L\). Let \(g \in \FP\) be a function mapping the first bit of any word to \(0\), that is \(g(bx) = 0x\). Then \(g \circ h\) is a proof system for \(0L\). Let \(h'\) be an arbitrary proof system for \(0L\). As \(h\) is optimal, we obtain \(h(f(x)) = h'(x)\) with a polynomial bounded \(f\). It follows that \(g(h(f(x))) = g(h'(x)) = h'(x)\) and hence \(g \circ h\) is an optimal proof system for \(0L\).
+    Again, we will proof the contraposition. Assume that \(h\) is an optimal proof system for \(0L \cup 1L\). Let \(g \in \FP\) be a function discarding the first bit of any word, that is \(g(bx) = x\). Then \(g \circ h\) is a proof system for \(L\). To show \(g \circ h\) is optimal, let \(h'\) be an arbitrary proof system for \(L\). Combining \(h'\) to \(g'(\langle b,x \rangle) := bh'(x)\), we obtain a proof system for \(0L \cup 1L\). As \(h\) is optimal for \(0L \cup 1L\), there is an polynomially bounded \(f\) with \(h(f(x)) = g'(x)\) for every \(x \in \Sigma^*\). Applying \(g\) on both sides, we obtain \(g(h(f(x))) = g'(g(x)) = h'(x)\). Thus, \(g \circ h\) is an optimal proof system.
 
     Using \(x \mapsto 0x\), we obtain \(L \redmany 0L \cup 1L\), as \(x \in L \Leftrightarrow 0x \in 0L \cup 1L\). Using \(bx \mapsto x\), we obtain \(0L \cup 1L \redmany L\), as \(bx \in 0L \cup 1L \Leftrightarrow x \in L\).
   \end{proof}
