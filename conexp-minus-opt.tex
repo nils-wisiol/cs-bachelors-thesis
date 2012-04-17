@@ -29,12 +29,12 @@
 
     For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(x = 0^i1z \in L_i\) that is not in \(L_i'\). Then there is an \(y\) with \(|y|^{2i} \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y|^{2i} > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) has long proofs on \(L_i' \subset L\).
 
-    Assume now, for contradiction, that \(f_i\) is a optimal proof system for \(L\). Let \(g\) be a function defined as
+    Assume now, for contradiction, that \(f_i\) is an optimal proof system for \(L\). Let \(g\) be a function defined as
       \[ g(bx) = \begin{cases}
                   f_i(x) & (b = 0), \\
                   x & (b = 1 \text{ and } x = 0^i10^* \in L_i = L_i').
                  \end{cases} \]
-    \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(f^*\) such that for all \(x \in L_i'\), \(f_i(f^*(x)) = g(x)\) and \(|f^*(x)| \leq p(|x|)\) for a polynomial \(p\). Let \(q\) be the polynomial \(q(n) = p(n)^{2i}\). As \(p(|x|)\) is positive, \(p(|x|) \leq p(|x|)^{2i}\). As there is an \(n\) with \(q(n) \leq t(n)\), there is an \(x\) in \(L_i\) such that \(|f^*(x)| \leq p(|x|) \leq q(|x|) = p(|x|)^{2i} \leq t(|x|)\). According to the definition of \(L_i'\), this yields \(f_i(f^*(x)) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
+    \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(f^*\) such that for all \(x \in L_i'\), \(f_i(f^*(x)) = g(x)\) and \(|f^*(x)| \leq p(|x|)\) for a polynomial \(p\). Let \(q\) be the polynomial \(q(n) = p(n)^{2i}\). Then \(p(|x|) \leq p(|x|)^{2i}\). As there is an \(n\) with \(q(n) \leq t(n)\), there is an \(x\) in \(L_i\) such that \(|f^*(x)| \leq p(|x|) \leq q(|x|) = p(|x|)^{2i} \leq t(|x|)\). According to the definition of \(L_i'\), this yields \(f_i(f^*(x)) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
   \end{proof}
 
   Using the relation to many-one-hard reducible sets proofed in lemma \ref{lemManyOneProofSystem}, we obtain
@@ -49,14 +49,14 @@
 
   \section{Making the Language Tally}
 
-  Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). In \(L_R\), there are exactly \(n\) words of length \(n\). As a consequence, \(\dens_{L_R}(n) = \sum_{i=1}^n i = \frac{n^2 + n}{2}\). Hence, \(L_R\) and \(L\) are both sparse. We can construct even less dense languages by constructing tally sets without optimal proof systems.
+  Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). In \(L_R\), there are exactly \(n\) words of length \(n\). As a consequence, \(\dens_{L_R}(n) = \sum_{i=1}^n i = \frac{n^2 + n}{2}\). Hence, \(L_R\) and \(L\) are both sparse. But we can construct even less dense languages by constructing tally sets without optimal proof systems.
 
-  \begin{theorem}
-    If \(L \subseteq \{ x \in \Sigma^*, x = 0^*10^* \}\) has no optimal proof system, then there is a \(T \in \TALLY\), that has no optimal proof system and is polynomial time equivalent to \(L\), that is \(L \redmany T\) and \(T \redmany L\).
+  \begin{theorem} \label{thmTally}
+    If \(L \subseteq \{ x \in \Sigma^*, x = 0^*10^* \}\) has no optimal proof system, then there is a \(T \in \TALLY\), that has no optimal proof system and is polynomial time equivalent to \(L\).
   \end{theorem}
 
   \begin{proof}
-    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost \(\TALLY\)---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a \(f \in \FP\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is a optimal proof system for \(L\), which contradicts the assumption that \(L\) has no optimal proof system. Using \(t\) we obtain \(L \redmany T\) and \(T \redmany L\).
+    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost tally---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a \(f \in \FP\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is a optimal proof system for \(L\), which contradicts the assumption that \(L\) has no optimal proof system. Using \(t\) we obtain \(L \redmany T\) and \(T \redmany L\).
   \end{proof}
   
   Using this theorem, we can further improve our results on the density of language not possessing an optimal proof system. For any tally language \(p(n) = n\) is an upper bound of its density.
@@ -65,13 +65,42 @@
     There is a language \(L\) with \(\dens_L(n) \leq n\) that possesses no optimal proof system.
   \end{corollary}
 
-  \section{Super-Sparse Without Optimal Proof System}
+  \section{Super-Sparse Sets without an Optimal Proof System}
+
+  By adapting the proof of our main theorem \ref{thmMain}, we can show that there are even arbitrary sparse sets in \(\coNTIME(t(n))\) that do not possess an optimal proof system. In order to do so, we have to slightly tighten the requirements of theorem \ref{thmMain}. To formalize the notion of arbitrary sparse, we introduce a polynomial-time computable, strictly increasing function \(u : \IN \to \IN\). Notice, as \(u\) is strictly increasing, we have \(u(n) \geq n\) for all \(n \in \IN\).
+
+  We will use \(u\) to constrain the length of any string in \(L\). Therefore, we define
+  \[
+    \widetilde{L}'_i = \{ x \in L'_i : \exists_{k \in \IN} |x| = u(k) \}. 
+  \]
+  By definition we obtain \(\widetilde{L}'_i \subseteq L_i\). We further define \(\widetilde{L} = \bigcup_{i>0} \widetilde{L}_i\). By doing so, in \(\widetilde{L}\) will only be strings whose length is in the range of \(u\). Informally speaking, the faster \(u\) is growing, the more sparse becomes \(\widetilde{L}\). More formally, we can state an upper bound for the density of \(\widetilde{L}\) as follows.
+  \begin{eqnarray*}
+    \dens_{\widetilde{L}}(n) 
+    &=& \sum_{\substack{k \in \IN \\ u(k) \leq n}} \sharp \{ x \in \widetilde{L} : |x| = k \} \\
+    &\leq& \sum_{\substack{k \in \IN \\ u(k) \leq n}} \sharp \{ x \in \Sigma^* : x = 0^a10^b \text{ and } |x| = k \} \\
+    &\leq& \sum_{\substack{k \in \IN \\ u(k) \leq n}} k
+    \leq \sum_{\substack{k \in \IN \\ u(k) \leq n}} n = u^{-1}(n) \cdot n,
+  \end{eqnarray*}
+  where \(u^{-1}(n)\) denotes the smallest natural number \(m\) for which \(u(m) \geq n\). Therefore, \(u^{-1}(m)\) is the maximum count of summands in the sum over \(k\) where \(u(k) \leq n\).
+
+  In order to adapt the proof of theorem \ref{thmMain} to this new circumstances, we have to only one issue. It occurs in the proof that \(\widetilde{L}\) is in \(\coNTIME(t(n))\). In order to decide whether an given string \(x\) is in the complement \(\widetilde{L}\), we have to additionally check in polynomial time whether there is an \(k \in \IN\) such that \(|x| = u(k)\). Since \(u \in \FP\) and is strictly increasing, this is possible. As for any \(k > |x|\), it follows \(u(k) \geq |x|\), we have to calculate at most \(|x|\) times the value of \(u(k)\) in order to check if there is an \(k\) with \(u(k) = |x|\). If there is no such \(k\), then the given \(x\) is for sure in the complement of \(\widetilde{L}\) and we are done. If there is such a \(k\), we proceed with the algorithm as described before.
+
+  Adapting the proof as described yields
+  
+  \begin{corollary} \label{corSparse}
+    Let \(t:\IN\to\IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Let \(u\) be a polynomial-time computable, strictly increasing function \(u:\IN\to\IN\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system; the density of \(L\) is bounded by 
+    \[
+     \dens_L(n) \leq u^{-1}(n) \cdot n,
+    \]
+    where \(u^{-1}\) denotes the smallest number \(m\) for which \(u(m) \geq n\).
+  \end{corollary}
+
 
   \section{Adding Redundancy}
 
   Given a language \(L\) not possessing an optimal proof system, we can show that there is even a mitotic language that has no optimal proof system. To show this, we mainly rely on results proven in chapter \ref{chpOverview}.
 
-  \begin{theorem}
+  \begin{theorem} \label{thmMitotic}
     If \(L\) possesses no optimal proof system, there is an polynomial time equivalent, many-one-mitotic language \(L' = 0L \cup 1L\) not possessing an optimal proof system, too.
   \end{theorem}
 
@@ -80,7 +109,27 @@
 
     Let \(A\) be the language \(0\Sigma^*\), then \(\overline{A} = 1\Sigma^*\). We obtain \(L' \cap A = 0L\) and \(L' \cap \overline{A} = 1L\). As shown in lemma \ref{lemAddBit}, \(L\) and \(bL\) are polynomial time equivalent. Using \(0x \mapsto 1x\), \(0L\) and \(1L\) are also polynomial time equivalent. Hence, \(L'\) is many-one-mitotic.
   \end{proof}
+  
+  
+  \section{Putting the Results Together}
+  
+  In this section, we will show that we can combine all results to one language, that is arbitrary sparse, tally, has no optimal proof system and possesses redundancy.
+  
+  \begin{corollary}
+    Let \(t:\IN\to\IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Let \(u\) be a polynomial-time computable, strictly increasing function \(u:\IN\to\IN\). Then there is a language \(L \in \coNTIME(t(n))\) that possesses no optimal proof system and 
+    \begin{enumerate}[(i)]
+     \item has its density bound by \(\dens_L(n) \leq u^{-1}(n) \cdot n\), where \(u^{-1}\) denotes the smallest number \(m\) for which \(u(m) \geq n\),
+     \item is tally,
+     \item is many-one-mitotic.
+    \end{enumerate}
+  \end{corollary}
+  
+  \begin{proof}
+    Corollary \ref{corSparse} yields a language \(L \in \coNTIME(t(n))\) that has no optimal proof system and fulfills our demands on its sparseness. By using theorem \ref{thmTally}, we obtain a tally language \(T\) that is polynomial time-equivalent to \(L\) with \(T \notin \OPT\). Finally, we can construct \(0T \cup 1T\), which is a language in \(\overline{\OPT}\) that is polynomial time-equivalent to \(T\), and hence to \(L\). \TODO{\(T \in \coNTIME(t(n))\)?}
+  \end{proof}
 
 
+
+ 
 
   
