@@ -9,9 +9,9 @@
 
   Notice, if for function \(f\) there is an \(n \in \IN\) with \(f(n) \geq p(n)\) for every polynomial \(p\), then there are for every polynomial \(p\) infinitely many \(n \in \IN\) for which \(f(n) \geq p(n)\) is satisfied. Otherwise, we could construct a polynomial \(q\) that is greater than \(f\) for every \(n \in \IN\). To see this, let \(p\) be a polynomial for which \(f(n) \geq p(n)\) for only finitely many \(n \in \IN\). Then we can determine the greatest difference between \(f\) and \(p\) by taking the maximum of the set \(\eta = \{ f(n) - p(n), f(n) \geq p(n) \}\). Then for the polynomial \(p'(n) = \eta + p(n) + 1\) there is no \(n\) with \(f(n) \geq p'(n)\), which contradicts the assumption that for every polynomial \(p\) there is a natural number such that \(f(n) \geq p(n)\).
 
-  Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proofed that the existence of a optimal acceptor is equivalent to the existence of a optimal proof system for every p-cylinder \(L\). We will here give a proof that is based on the work of Messner, but stays in the notion of proof systems.
+  Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proved that the existence of an optimal acceptor is equivalent to the existence of an optimal proof system for every p-cylinder \(L\). We will here give a proof that is based on the work of Messner, but stays in the notion of proof systems.
 
-  Before formally proofing theorem \ref{thmMain}, let us briefly discuss the main idea of the proof. As a first observation, we notice that we can enumerate all \(\FP\)-functions \(f_i\) such that \(\runtime(f_i) \leq n^i + i\). We then construct a language \(L\) by uniting languages \(L_i\). We will construct them in a way such that there are only long \(f_i\)-proofs for all strings in \(L_i\). Afterwards we assume there is an optimal proof system \(g\) for \(L\). As for every \(\FP\)-function there is a subset that has only long proofs, there is such a subset \(L_g\) for \(g\). But as it turns out we can state a proof system for \(L_g\) that has short proofs, we can combine both proof systems to a system that runs polynomial equally fast on nearly every string in \(L\), but way faster on strings in \(L_g\). Hence, \(g\) cannot be a optimal proof system.
+  Before formally proofing theorem \ref{thmMain}, let us briefly discuss the main idea of the proof. As a first observation, we notice that we can enumerate all \(\FP\)-functions \(f_i\) such that \(\runtime(f_i) \leq n^i + i\). We then construct a language \(L\) by uniting languages \(L_i\). We will construct them in a way such that there are only long \(f_i\)-proofs for all strings in \(L_i\). Afterwards we assume there is an optimal proof system \(g\) for \(L\). As for every \(\FP\)-function there is a subset that has only long proofs, there is such a subset \(L_g\) for \(g\). But as it turns out we can state a proof system for \(L_g\) that has short proofs, we can combine both proof systems to a system that runs polynomial equally fast on nearly every string in \(L\), but way faster on strings in \(L_g\). Hence, \(g\) cannot be an optimal proof system.
   
   \begin{proof}[Formal proof of theorem \ref{thmMain}]
     Let \(f_1, f_2, ...\) be a enumeration of all \(\FP\)-functions with \(\runtime(f_i) \leq n^i + i\).
@@ -37,7 +37,7 @@
     \(g\) is a proof system for \(L\) with polynomial length-bounded proofs for all \(x \in L_i\). As \(f_i\) is optimal, there is a function \(f^*\) such that for all \(x \in L_i'\), \(f_i(f^*(x)) = g(x)\) and \(|f^*(x)| \leq p(|x|)\) for a polynomial \(p\). Let \(q\) be the polynomial \(q(n) = p(n)^{2i}\). Then \(p(|x|) \leq p(|x|)^{2i}\). As there is an \(n\) with \(q(n) \leq t(n)\), there is an \(x\) in \(L_i\) such that \(|f^*(x)| \leq p(|x|) \leq q(|x|) = p(|x|)^{2i} \leq t(|x|)\). According to the definition of \(L_i'\), this yields \(f_i(f^*(x)) \neq x\). Therefore, \(f_i\) is not optimal on \(L_i'\), which contradicts the assumption that \(f_i\) is optimal on \(L\).
   \end{proof}
 
-  Using the relation to many-one-hard reducible sets proofed in lemma \ref{lemManyOneProofSystem}, we obtain
+  Using the relation to many-one-hard reducible sets proven in lemma \ref{lemManyOneProofSystem}, we obtain
 
   \begin{corollary} \label{corHardSets}
     No set \(\redmany\)-hard for \(\coNE\) has an optimal proof system.
@@ -56,7 +56,7 @@
   \end{theorem}
 
   \begin{proof}
-    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost tally---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a \(f \in \FP\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is a optimal proof system for \(L\), which contradicts the assumption that \(L\) has no optimal proof system. Using \(t\) we obtain \(L \redmany T\) and \(T \redmany L\).
+    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost tally---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a \(f \in \FP\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is an optimal proof system for \(L\), which contradicts the assumption that \(L\) has no optimal proof system. Using \(t\) we obtain \(L \redmany T\) and \(T \redmany L\).
   \end{proof}
   
   Using this theorem, we can further improve our results on the density of language not possessing an optimal proof system. For any tally language \(p(n) = n\) is an upper bound of its density.
@@ -119,13 +119,13 @@
     Let \(t:\IN\to\IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Let \(u\) be a polynomial-time computable, strictly increasing function \(u:\IN\to\IN\). Then there is a language \(L \in \coNTIME(t(n))\) that possesses no optimal proof system and 
     \begin{enumerate}[(i)]
      \item has its density bound by \(\dens_L(n) \leq u^{-1}(n) \cdot n\), where \(u^{-1}\) denotes the smallest number \(m\) for which \(u(m) \geq n\),
-     \item is tally,
-     \item is many-one-mitotic.
+     \item is many-one-mitotic,
+     \item is tally.
     \end{enumerate}
   \end{corollary}
   
   \begin{proof}
-    Corollary \ref{corSparse} yields a language \(L \in \coNTIME(t(n))\) that has no optimal proof system and fulfills our demands on its sparseness. By using theorem \ref{thmTally}, we obtain a tally language \(T\) that is polynomial time-equivalent to \(L\) with \(T \notin \OPT\). Finally, we can construct \(0T \cup 1T\), which is a language in \(\overline{\OPT}\) that is polynomial time-equivalent to \(T\), and hence to \(L\). \TODO{\(T \in \coNTIME(t(n))\)?}
+    Corollary \ref{corSparse} yields a language \(L \in \coNTIME(t(n))\) that has no optimal proof system and fulfills our demands on its sparseness. By using theorem \ref{thmMitotic}, we obtain the language \(0L \cup 1L\) that is polynomial time-equivalent to \(L\) and possesses no optimal proof system. Finally, we can use theorem \ref{thmTally} to construct a tally set \(T \notin \OPT\) and is polynomial time-equivalent to \(L\). \TODO{\(T \in \coNTIME(t(n))\)?}
   \end{proof}
 
 

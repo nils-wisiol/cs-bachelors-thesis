@@ -4,7 +4,7 @@
   Let \(\Sigma = \{ 0, 1 \}\) denote the alphabet. The output of a Turing transducer \(M\) on input \(x \in \Sigma^*\) is denoted by \(M(x)\). If the transducer \(M\) does not accept or runs forever on input \(x\), we define \(M(x) = \perp\). We say a Turing transducer \defNotion{calculates} a partial function \(f\), if \(M(x) = f(x)\) for all \(x \in \Sigma^*\). We further define \(\runtime_M(x)\) as the number of steps the transducer \(M\) runs on input \(x \in \Sigma^*\). With \(\FP\) we denote the set of all partial functions \(f\) for which a Turing transducer \(M\) calculating \(f\) exists such that \(\runtime_M(x) \leq p(|x|)\) for a polynomial \(p\).
 
   \begin{definition}
-    A function \(f \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(f\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \defNotion{\(h\)-proof} for \(x\). \(f\) is called an \defNotion{polynomially bounded} proof system, if there is a polynomial \(p\) such that for every \(x \in L\), there is a \(h\)-proof \(w\) with \(|w| \leq q(|x|)\).
+    A function \(h \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(h\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \defNotion{\(h\)-proof} for \(x\). \(h\) is called an \defNotion{polynomially bounded} proof system, if there is a polynomial \(p\) such that for every \(x \in L\), there is a \(h\)-proof \(w\) with \(|w| \leq q(|x|)\).
   \end{definition}
 
   With this definition, a proof system for \(L\) is basically a polynomial-time bounded function that enumerates \(L\). Notice, although its time bound against the input, the shortest proof of a string \(w \in L\) can be be very long. To give an example, let \(h\) be defined by
