@@ -3,11 +3,20 @@
 
   \section{Basic Construction}
   
+  \begin{lemma}\label{lemSimulation}
+    \begin{enumerate}[(a)]
+     \item There is an enumeration of all \(\FP\)-functions \(f_i\) such that for each function it holds \(\runtime(f_i) \leq n^i + i\).
+     \item There is an universal Turing transducer \(U\) that can simulate every program \(\alpha\) in \(O(n^2)\) steps, where \(n\) is the number of steps \(M_\alpha\) runs on the same input.
+     \item There is an universal Turing transducer \(U\) that can for every \(i \in \IN\) and every input \(y \in \Sigma^*\) simulate \(f_i(y)\) in \(O((n^i + i)^2) = O(n^{2i})\) steps, where \(n = |y|\).
+    \end{enumerate}
+  \end{lemma}
+  
+  
   \begin{theorem}\label{thmMain}
     Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system.
   \end{theorem}
 
-  Notice, if for function \(f\) there is an \(n \in \IN\) with \(f(n) \geq p(n)\) for every polynomial \(p\), then there are for every polynomial \(p\) infinitely many \(n \in \IN\) for which \(f(n) \geq p(n)\) is satisfied. Otherwise, we could construct a polynomial \(q\) that is greater than \(f\) for every \(n \in \IN\). To see this, let \(p\) be a polynomial for which \(f(n) \geq p(n)\) for only finitely many \(n \in \IN\). Then we can determine the greatest difference between \(f\) and \(p\) by taking the maximum of the set \(\eta = \{ f(n) - p(n), f(n) \geq p(n) \}\). Then for the polynomial \(p'(n) = \eta + p(n) + 1\) there is no \(n\) with \(f(n) \geq p'(n)\), which contradicts the assumption that for every polynomial \(p\) there is a natural number such that \(f(n) \geq p(n)\).
+  Notice, if for function \(f\) there is an \(n \in \IN\) with \(f(n) \geq p(n)\) for every polynomial \(p\), then for every polynomial \(p\) there are infinitely many \(n \in \IN\) for which \(f(n) \geq p(n)\) is satisfied. Otherwise, we could construct a polynomial \(q\) that is greater than \(f\) for every \(n \in \IN\). To see this, let \(p\) be a polynomial for which \(f(n) \geq p(n)\) for only finitely many \(n \in \IN\). Then we can determine the greatest difference between \(f\) and \(p\) by taking the maximum of the set \(\eta = \{ f(n) - p(n), f(n) \geq p(n) \}\). Then for the polynomial \(p'(n) = \eta + p(n) + 1\) there is no \(n\) with \(f(n) \geq p'(n)\), which contradicts the assumption that for every polynomial \(p\) there is a natural number such that \(f(n) \geq p(n)\).
 
   Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proved that the existence of an optimal acceptor is equivalent to the existence of an optimal proof system for every p-cylinder \(L\). We will here give a proof that is based on the work of Messner, but stays in the notion of proof systems.
 
@@ -26,6 +35,7 @@
     By negating the condition for \(L_i'\), we obtain
       \[ \overline{L_i'} = \{ x \in \Sigma^* | x \notin L_i \vee \left( \exists_{y \in \Sigma^*} |y|^{2i} \leq t(|x|) \wedge f_i(y) = x \right) \}. \]
     For any given \(x\), we can decide in polynomial time whether it is in any \(L_i\) or not. If it is not, then \(x\) is in \(\overline{L_i'}\) for all \(i > 0\) and therefore \(x \in \overline{L}\), so we are done. If it is in any \(L_i\), it is in exactly one \(L_i\). Let \(i^*\) be the set with \(x \in L_{i^*}\). We can simulate \TODO{have a look at simulation runtime} a polynomial-time machine calculating \(f_{i^*}(y)\) on every input \(y \in \Sigma^*\) with \(|y|^{2i} \leq t(|x|)\). If, and only if, there is a path with \(f_{i^*}(y) = x\), then \(x \in \overline{L}\). In both cases, \(\overline{L} \in \NTIME(t(n))\).
+    \TODO{more explicit}
 
     For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(x = 0^i1z \in L_i\) that is not in \(L_i'\). Then there is an \(y\) with \(|y|^{2i} \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y|^{2i} > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) has long proofs on \(L_i' \subset L\).
 
@@ -44,7 +54,7 @@
   \end{corollary}
 
   \begin{proof}
-    With \(t(n) = 2^n\), we can get an \(L \in \coNE\) that has no optimal proof system. Any \(\redmany\)-hard set \(A\) for \(\coNE\) is \(L \redmany A\). Together with lemma \ref{lemManyOneProofSystem} we obtain, that \(A\) cannot have optimal proof system.
+    With \(t(n) = 2^n\), we can get an \(L \in \coNE\) that has no optimal proof system. Any \(\redmany\)-hard set \(A\) for \(\coNE\) is \(L \redmany A\). Together with lemma \ref{lemManyOneProofSystem} we obtain, that \(A\) cannot have an optimal proof system.
   \end{proof}
 
   \section{Making the Language Tally}
@@ -52,7 +62,7 @@
   Now, let us take a closer look at this set \(L\) that has no optimal proof system. One first observation is that \(L\) is sparse. As every \(L_i'\) only contains strings that are of the form \(0^i10^*\), \(L\) is a subset of the regular language \(L_R = 0^*10^*\). Therefore, the density of \(L_R\) is an upper bound for the density of \(L\). In \(L_R\), there are exactly \(n\) words of length \(n\). As a consequence, \(\dens_{L_R}(n) = \sum_{i=1}^n i = \frac{n^2 + n}{2}\). Hence, \(L_R\) and \(L\) are both sparse. But we can construct even less dense languages by constructing tally sets without optimal proof systems.
 
   \begin{theorem} \label{thmTally}
-    If \(L \subseteq \{ x \in \Sigma^*, x = 0^*10^* \}\) has no optimal proof system, then there is a \(T \in \TALLY\), that has no optimal proof system and is polynomial time equivalent to \(L\).
+    If \(L \subseteq 0^*10^* \) has no optimal proof system, then there is a \(T \in \TALLY\), that has no optimal proof system and is polynomial time equivalent to \(L\).
   \end{theorem}
 
   \begin{proof}
@@ -85,7 +95,7 @@
   \]
   \TODO{give an example}
 
-  In order to adapt the proof of theorem \ref{thmMain} to this new circumstances, we have to only one issue. It occurs in the proof that \(\widetilde{L}\) is in \(\coNTIME(t(n))\). In order to decide whether an given string \(x\) is in the complement \(\widetilde{L}\), we have to additionally check in polynomial time whether there is an \(k \in \IN\) such that \(|x| = u(k)\). Since \(u \in \FP\) and is strictly increasing, this is possible. As for any \(k > |x|\), it follows \(u(k) \geq |x|\), we have to calculate at most \(|x|\) times the value of \(u(k)\) in order to check if there is an \(k\) with \(u(k) = |x|\). If there is no such \(k\), then the given \(x\) is for sure in the complement of \(\widetilde{L}\) and we are done. If there is such a \(k\), we proceed with the algorithm as described before.
+  In order to adapt the proof of theorem \ref{thmMain} to this new circumstances, we have to adapt one issue. It occurs in the proof that \(\widetilde{L}\) is in \(\coNTIME(t(n))\). In order to decide whether an given string \(x\) is in the complement \(\widetilde{L}\), we have to additionally check in polynomial time whether there is an \(k \in \IN\) such that \(|x| = u(k)\). Since \(u \in \FP\) and is strictly increasing, this is possible. As for any \(k > |x|\), it follows \(u(k) \geq |x|\), we have to calculate at most \(|x|\) times the value of \(u(k)\) in order to check if there is an \(k\) with \(u(k) = |x|\). If there is no such \(k\), then the given \(x\) is for sure in the complement of \(\widetilde{L}\) and we are done. If there is such a \(k\), we proceed with the algorithm as described before.
 
   Adapting the proof as described yields
   
@@ -107,9 +117,9 @@
   \end{theorem}
 
   \begin{proof}
-    As \(L\) has no optimal proof system, lemma \ref{lemMitotic} states that \(L' = 0L \cup 1L\) is polynomial time equivalent and does not possess an optimal proof system.
+    As \(L\) has no optimal proof system, corollary \ref{corFurtherOPT} states that \(L' = 0L \cup 1L\) is polynomial time equivalent and does not possess an optimal proof system.
 
-    Let \(A\) be the language \(0\Sigma^*\), then \(\overline{A} = 1\Sigma^*\). We obtain \(L' \cap A = 0L\) and \(L' \cap \overline{A} = 1L\). As shown in lemma \ref{lemAddBit}, \(L\) and \(bL\) are polynomial time equivalent. Using \(0x \mapsto 1x\), \(0L\) and \(1L\) are also polynomial time equivalent. Hence, \(L'\) is many-one-mitotic.
+    Let \(A\) be the language \(0\Sigma^*\), then \(\overline{A} = 1\Sigma^*\). We obtain \(L' \cap A = 0L\) and \(L' \cap \overline{A} = 1L\). As shown in corollary \ref{corFurtherOPT}, \(L\) and \(bL\) are polynomial time equivalent. Using \(0x \mapsto 1x\), \(0L\) and \(1L\) are also polynomial time equivalent. Hence, \(L'\) is many-one-mitotic.
   \end{proof}
   
   

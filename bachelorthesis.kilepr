@@ -168,13 +168,13 @@ order=-1
 
 [item:conexp-minus-opt.tex]
 archive=true
-column=585
+column=154
 encoding=UTF-8
 highlight=LaTeX
-line=58
+line=9
 mode=LaTeX
 open=true
-order=1
+order=0
 
 [item:german.tex]
 archive=true
@@ -213,7 +213,7 @@ encoding=UTF-8
 highlight=LaTeX
 line=94
 mode=LaTeX
-open=true
+open=false
 order=0
 
 [item:packages.tex]
@@ -228,10 +228,10 @@ order=1
 
 [item:preliminaries.tex]
 archive=true
-column=233
+column=254
 encoding=UTF-8
 highlight=LaTeX
-line=6
+line=49
 mode=LaTeX
 open=false
 order=1
@@ -251,7 +251,7 @@ archive=true
 column=27
 encoding=UTF-8
 highlight=LaTeX
-line=24
+line=20
 mode=LaTeX
 open=false
 order=2
@@ -283,8 +283,8 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:conexp-minus-opt.tex]
-CursorColumn=585
-CursorLine=58
+CursorColumn=154
+CursorLine=9
 JumpList=
 ViMarks=
 
@@ -319,8 +319,8 @@ JumpList=
 ViMarks=
 
 [view-settings,view=0,item:preliminaries.tex]
-CursorColumn=233
-CursorLine=6
+CursorColumn=254
+CursorLine=49
 JumpList=
 ViMarks=
 
@@ -332,7 +332,7 @@ ViMarks=
 
 [view-settings,view=0,item:symbols.tex]
 CursorColumn=27
-CursorLine=24
+CursorLine=20
 JumpList=
 ViMarks=
 
