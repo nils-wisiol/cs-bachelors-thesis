@@ -38,7 +38,7 @@
   Using this lemma, for a language \(L \in \OPT\), we can construct further languages possessing optimal proof systems. We call two languages \(A\) and \(B\) \defNotion{polynomial time equivalent}, if \(A \redmany B\) and \(B \redmany A\). With this notion, we can easily state the following.
   
   \begin{corollary} \label{corFurtherOPT}
-    For polynomial time equivalent languages \(A\) and \(B\), \(A \in \OPT\) if and only if \(B \in \OPT\). Especially, if \(L \notin \OPT\), then for a \(b \in \Sigma\), \(bL := \{ bw : w \in L \} \notin \OPT\) as well as \(0L \cup 1L \notin \OPT\).
+    For polynomial time equivalent languages \(A\) and \(B\), \(A \in \OPT\) if and only if \(B \in \OPT\). Especially, if \(L \notin \OPT\), then for \(b \in \Sigma\), \(bL := \{ bw : w \in L \} \notin \OPT\) as well as \(0L \cup 1L \notin \OPT\).
   \end{corollary}
   
   \begin{proof}
@@ -92,7 +92,7 @@
   
   \section{Proof Systems and the $\P$ versus $\NP$ question}  
 
-  As we have seen, \(\NP \subseteq \OPT\). It is an open question whether \(\NP \supseteq \OPT\). Lemma \ref{lemPHasOptimalProofSystem} connects to the \(\P\)-versus-\(\NP\)-question by stating different properties for \(\P\) and \(\NP\). If one would find a set in \(\NP\) without an p-optimal proof system, one would have separated \(\P\) from \(\NP\).
+  As we have seen, \(\NP \subseteq \OPT\). It is an open question whether \(\NP \supseteq \OPT\). Lemma \ref{lemPHasOptimalProofSystem} connects to the \(\P\)-versus-\(\NP\)-question by stating different properties for \(\P\) and \(\NP\): if one would find a set in \(\NP\) without an p-optimal proof system, one would have separated \(\P\) from \(\NP\).
 
   \begin{corollary}
     If there is no p-optimal proof system for \(\SAT\), then \(\P \neq \NP\).
@@ -103,8 +103,6 @@
   \begin{lemma} \label{lemNPisCoNP}
    \(\NP = \coNP\) if and only if \(\TAUT \in \NP\).
   \end{lemma}
-
-  \TODO{too long!}
   
   \begin{proof}
     Without further assumptions, we can show by using a nondeterministic Turing transducer, that an arbitrary formula is not a tautology in polynomial time by guessing and verifying an assignment for which the formula is falsified. Thus, \(\overline{\TAUT} \in \NP\).

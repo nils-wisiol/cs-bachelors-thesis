@@ -3,25 +3,25 @@
 
   \section{Basic Construction}
   
-  Before stating and proofing the main theorem of this thesis, we will have a look at universal Turing transducers. In contrast to usual transducer, an universal transducer \(U\) is able to simulate any other given transducer \(M_\alpha\). Given a program \(\alpha\) and an input \(y\), it then calculates \(M(y) = U(\alpha, y)\). Doing so, the runtime of \(U\) is quadratic slower than the runtime of \(M\). We will need the propositions proven here later on in order to proof theorem \ref{thmMain}.
+  Before stating and proofing the main theorem of this thesis, we will have a look at universal Turing transducers. In contrast to usual transducers, an universal transducer \(U\) is able to simulate any other given transducer \(M_\alpha\). Given a program \(\alpha\) and an input \(y\), it then calculates \(M_\alpha(y) = U(\alpha, y)\). Doing so, the runtime of \(U\) is quadratic slower than the runtime of \(M\). We will need the propositions proven here later on in order to proof theorem \ref{thmMain}.
   
   \begin{lemma}\label{lemSimulation}
     \begin{enumerate}[(i)]
      \item There is an enumeration of all \(\FP\)-functions \(f_i\) such that for each function it holds \(\runtime(f_i) \leq n^i + i\).
-     \item Let \(\alpha \in \Sigma^*\) be an arbitrary program, and \(M_\alpha\) the associated Turing transducer. Then there is an universal Turing transducer \(U\) that can simulate \(\alpha\) on any input in \(O(n^2)\) steps, where \(n\) is the number of steps \(M_\alpha\) runs on the same input.
-     \item There is an universal Turing transducer \(U\) that can for every \(i \in \IN\) and every input \(y \in \Sigma^*\) simulate \(f_i(y)\) in \(O(n^{2i})\) steps, where \(n = |y|\).
+     \item Let \(\alpha \in \Sigma^*\) be an arbitrary program, and \(M_\alpha\) the associated Turing transducer. Then there is an universal Turing transducer \(U\) that can simulate \(M_\alpha\) on any input in \(O(n^2)\) steps, where \(n\) is the number of steps \(M_\alpha\) runs on the same input.
+     \item There is an universal Turing transducer \(U\) that simulates for every \(i \in \IN\) and every input \(y \in \Sigma^*\) the function \(f_i(y)\) in \(O(n^{2i})\) steps, where \(n = |y|\).
     \end{enumerate}
   \end{lemma}
   
   \begin{proof}
     \begin{enumerate}[(i)]
-     \item Let \(M_1, M_2, ...\) be Gödel's enumeration of all Turing transducers. We modify this enumeration by applying a clock to each transducer \(M_i\) that rejects the given input \(y\) after the \((|y|^i + |y|)\)-th step, obtaining an enumeration \(M_1', M_2', ...\) of machines runtime bounded by \(n^i+i\). Now let \(f_1,f_2,...\) be the functions calculated by the transducers \(M_i'\). As our runtime maximum is unbounded for \(n \to \infty\), our enumeration contains all polynomial time functions.
+     \item Let \(M_1, M_2, ...\) be Gödel's enumeration of all Turing transducers. We modify this enumeration by applying a clock to each transducer \(M_i\) that rejects the given input \(y\) after the \((|y|^i + |y|)\)-th step, obtaining an enumeration \(M_1', M_2', ...\) of machines runtime bounded by \(n^i+i\). Now let \(f_1,f_2,...\) be the functions calculated by the transducers \(M_i'\). As the runtime maximum is unbounded for \(n \to \infty\), this enumeration contains all polynomial time functions.
      
-     \item Based on a similar proof in the book of Arora and Barak \cite{AB09}. Without loss of generality, we can assume that \(M_\alpha\) has only one work tape and runs on alphabet \( \{ \bigstar, \Box, 0, 1 \}\). This is possible, as if \(M\) runs on more tapes or uses a greater alphabet, we can construct a transducer \(M'\) that fulfills our requirements and uses \(O(n^2)\) steps on input \(y\), where \(n\) is the number of steps needed for the calculation of \(M(y)\). 
+     \item Based on a similar proof in the book of Arora and Barak \cite{AB09}. Without loss of generality, we can assume that \(M_\alpha\) has only one work tape and runs on alphabet \( \{ \bigstar, \Box, 0, 1 \}\). This is possible, as if \(M_\alpha\) runs on more tapes or uses a greater alphabet, we can construct a transducer \(M'\) that fulfills our requirements and uses \(O(n^2)\) steps on input \(y\), where \(n\) is the number of steps needed for the calculation of \(M_\alpha(y)\). 
      
-     Let now \(U\) be a Turing transducer with five tapes, an input tape, an output tape, a tape to store the description of \(M\) respectively \(\alpha\), a tape to store the current status in the simulation of \(M\) and finally a tape that simulates the working tape of \(M\).
+     Let now \(U\) be a Turing transducer with five tapes, an input tape, an output tape, a tape to store the description of \(M_\alpha\), a tape to store the current status in the simulation of \(M_\alpha\) and finally a tape that simulates the working tape of \(M_\alpha\).
      
-     In order to simulate on computational step of \(M\), \(U\) scans the transition table of \(M\) to obtain the new status, a symbol to write and the head movement. It then simulates the actions that would be done by \(M\). As we can see, the simulation of one step of \(M\) takes \(c\) steps of \(U\), where \(c\) is a number depending only on the size of the transition's function table of \(M\).
+     In order to simulate one computational step of \(M\), \(U\) scans the transition table of \(M_\alpha\) to obtain the new status, a symbol to write and the head movement. It then simulates the actions that would be done by \(M_\alpha\). As we can see, the simulation of one step of \(M_\alpha\) takes \(c\) steps of \(U\), where \(c\) is a number depending only on the size of the transition's function table of \(M\).
      
      \item By construction of the enumeration \(f_1,f_2,...\), for each \(f_i\) there is a transducer \(M_i\) with \(\runtime_M(y) \leq |y|^i + |y|\). As proven before, there is an universal transducer that can simulate \(M_i'\) with quadratic slowdown. It follows that \(\runtime_U(i,y) \leq (|y|^i + |y|)^2\), and therefore \(\runtime_U(i,y) \in O(|y|^{2i})\).
     \end{enumerate}
@@ -31,25 +31,25 @@
     Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system.
   \end{theorem}
 
-  Notice, if for function \(f\) there is an \(n \in \IN\) with \(f(n) \geq p(n)\) for every polynomial \(p\), then for every polynomial \(p\) there are infinitely many \(n \in \IN\) for which \(f(n) \geq p(n)\) is satisfied. Otherwise, we could construct a polynomial \(q\) that is greater than \(f\) for every \(n \in \IN\). To see this, let \(p\) be a polynomial for which \(f(n) \geq p(n)\) for only finitely many \(n \in \IN\). Then we can determine the greatest difference between \(f\) and \(p\) by taking the maximum of the set \(\eta = \{ f(n) - p(n), f(n) \geq p(n) \}\). Then for the polynomial \(p'(n) = \eta + p(n) + 1\) there is no \(n\) with \(f(n) \geq p'(n)\), which contradicts the assumption that for every polynomial \(p\) there is a natural number such that \(f(n) \geq p(n)\).
+  Notice, if for a function \(f\) there is an \(n \in \IN\) with \(f(n) \geq p(n)\) for every polynomial \(p\), then for every polynomial \(p\) there are infinitely many \(n \in \IN\) for which \(f(n) \geq p(n)\) is satisfied. Otherwise, we could construct a polynomial \(q\) that is greater than \(f\) for every \(n \in \IN\). To see this, let \(p\) be a polynomial for which \(f(n) \geq p(n)\) for only finitely many \(n \in \IN\). Then we can determine the greatest difference between \(f\) and \(p\) by taking the maximum of the set \(\eta = \{ f(n) - p(n), f(n) \geq p(n) \}\). Then for the polynomial \(p'(n) = \eta + p(n) + 1\) there is no \(n\) with \(f(n) \geq p'(n)\), which contradicts the assumption that for every polynomial \(p\) there is a natural number such that \(f(n) \geq p(n)\).
 
   Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proved that the existence of an optimal acceptor is equivalent to the existence of an optimal proof system for every p-cylinder \(L\). We will here give a proof that is based on the work of Messner, but stays in the notion of proof systems.
 
-  Before formally proofing theorem \ref{thmMain}, let us briefly discuss the main idea of the proof. As proven before, there is an enumeration of all \(\FP\)-functions \(f_i\) such that \(\runtime(f_i) \leq n^i + i\). We then construct a language \(L\) by uniting languages \(L_i\). We will construct them in a way such that there are only long \(f_i\)-proofs for all strings in \(L_i\). Afterwards we assume there is an optimal proof system \(g\) for \(L\). As for every \(\FP\)-function there is a subset that has only long proofs, there is such a subset \(L_g\) for \(g\). But as it turns out we can state a proof system for \(L_g\) that has short proofs, we can combine both proof systems to a system that runs polynomial equally fast on nearly every string in \(L\), but way faster on strings in \(L_g\). Hence, \(g\) cannot be an optimal proof system.
+  Before formally proofing theorem \ref{thmMain}, let us briefly discuss the main idea of the proof. As proven before, there is an enumeration of all \(\FP\)-functions \(f_i\) such that \(\runtime(f_i) \leq n^i + i\). We construct a language \(L\) by uniting languages \(L_i'\), which we construct in a way such that there are only long \(f_i\)-proofs for all strings in \(L_i'\). Afterwards we assume there is an optimal proof system \(f_i\) for \(L\). As for every \(\FP\)-function there is a subset that has only long proofs, there is such a subset \(L_i'\) for \(f_i\). But as it turns out, we can state a proof system for \(L_i'\) that has short proofs, we can combine both proof systems to a system that runs polynomial equally fast on nearly every string in \(L\), but way faster on strings in \(L_i'\). Hence, \(f_i\) cannot be an optimal proof system.
   
   \begin{proof}[Formal proof of theorem \ref{thmMain}]
     Let \(f_1, f_2, ...\) be a enumeration of all \(\FP\)-functions with \(\runtime(f_i) \leq n^i + i\).
     For any \(i > 0\), let \(L_i\) be the regular language described by the expression \(0^i10^*\). Define
       \[ L_i' = \{ x \in L_i | \forall_{ y \in \Sigma^* } |y|^{2i} \leq t(|x|) \implies f_i(y) \neq x \}. \]
-    That is, as long as you put strings of length \(|y|^{2i} \leq t(|x|)\) into \(f_i\), you will not obtain \(x\).
+    That is, as long as we put strings of length \(|y|^{2i} \leq t(|x|)\) into \(f_i\), we will not obtain \(x\).
     Let \(L = \bigcup_{i > 0} L_i'\).
 
-    First, we obtain \(L \in \coNTIME(t(n))\). To show this, one considers
+    First, we prove \(L \in \coNTIME(t(n))\). To show this, one considers
       \[L \in \coNTIME(t(n)) \Leftrightarrow \overline{L} = \overline{\bigcup_{i > 0} L_i'} = \bigcap_{i > 0} \overline{L_i'} \in \NTIME(t(n)).\]
     By negating the condition for \(L_i'\), we obtain
       \[ \overline{L_i'} = \{ x \in \Sigma^* | x \notin L_i \vee \left( \exists_{y \in \Sigma^*} |y|^{2i} \leq t(|x|) \wedge f_i(y) = x \right) \}. \]
     For any given \(x\), we can decide in polynomial time whether it is in any \(L_i\) or not. If it is not, then \(x\) is in \(\overline{L_i'}\) for all \(i > 0\) and therefore \(x \in \overline{L}\), so we are done. If it is in any \(L_i\), it is in exactly one \(L_i\). Let \(i^*\) be the set with \(x \in L_{i^*}\). 
-    Using the abilities of the nondeterministic time bound, we now simulate the Turing transducer \(M_{i^*}\) that corresponds to \(f_{i^*}\) with an universal transducer on every input \(y \in \Sigma^*\) with \(|y|^{2i} \leq t(|x|)\). As proven before in lemma \ref{lemSimulation}, this is possible with quadratic slowdown. Hence the calculation takes \(O((\runtime_{M_{i^*}}(i,y))^2) = O(|y|^{2i})\) steps to complete. As \(|y|^{2i} < t(|x|)\), this is within our time bound.
+    Using the abilities of the nondeterministic time bound, we now simulate the Turing transducer \(M_{i^*}\) that corresponds to \(f_{i^*}\) with an universal transducer on every input \(y \in \Sigma^*\) with \(|y|^{2i} \leq t(|x|)\). As proven before in lemma \ref{lemSimulation}, this is possible with quadratic slowdown. Hence the calculation takes \(O((\runtime_{M_{i^*}}(y))^2) = O(|y|^{2i})\) steps to complete. As \(|y|^{2i} < t(|x|)\), this is within our time bound.
     We then can decide whether \(x \in \overline{L}\). If, and only if, there is a path with \(f_{i^*}(y) = x\), then \(x \in \overline{L}\). In both cases, we obtain \(\overline{L} \in \NTIME(t(n))\).
 
     For a proof system \(f_i\) with \(f_i(\Sigma^*) = L\), we observe that \(L_i' = L_i\). Assume there is an \(x = 0^i1z \in L_i\) that is not in \(L_i'\). Then there is an \(y\) with \(|y|^{2i} \leq t(|x|)\) and \(f_i(y) = x\). Since \(f_i\) is a proof system for \(L\), this yields \(x = 0^i1z \in L\) and so \(x \in L_i'\), which contradicts the assumption. Therefore, for any \(y\) with \(f_i(y) = x \in L_i\) we know that \(|y|^{2i} > t(|x|)\). Speaking informally, every proof system \(f_i\) for \(L\) has long proofs on \(L_i' \subset L\).
@@ -81,7 +81,9 @@
   \end{theorem}
 
   \begin{proof}
-    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost tally---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a polynomial bounded \(f\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is an optimal proof system for \(L\), which contradicts the assumption that \(L\) has no optimal proof system. Using \(t\) we obtain \(L \redmany T\) and \(T \redmany L\).
+    Using the Cantor pairing function, we can construct a bijective function \(t \in \FP\) thats maps each element of \(L\) one-to-one to an element of \(T \subseteq \TALLY\). Since all strings in \(L\) are almost tally---namely every string in \(L\) contains only one 1---\(t\) is a polynomial time function. 
+    
+    Let \(g\) be an optimal proof system for \(T = \{ t(x), x \in L \}\). Then \(t^{-1} \circ g\) is a proof system for \(L\). Let \(h\) be an arbitrary proof system for \(L\). Then \(t \circ h\) is a proof system for \(T\). As \(g\) is optimal, there is a polynomial bounded \(f\) with \(g(f(x)) = t(h(x))\). It follows that \(t^{-1}(g(f(x))) = h(x)\) for all proof systems \(h\) for \(L\). Hence, \(t^{-1} \circ g\) is an optimal proof system for \(L\), which contradicts the assumption that \(L\) has no optimal proof system. Using \(t\) we obtain \(L \redmany T\) and \(T \redmany L\).
   \end{proof}
   
   Using this theorem, we can further improve our results on the density of languages not possessing an optimal proof system. For any tally language \(p(n) = n\) is an upper bound of its density.
@@ -92,34 +94,20 @@
 
   \section{Super-Sparse Sets without an Optimal Proof System}
 
-  By adapting the proof of our main theorem \ref{thmMain}, we can show that there are even arbitrary sparse sets in \(\coNTIME(t(n))\) that do not possess an optimal proof system. In order to do so, we have to slightly tighten the requirements of theorem \ref{thmMain}. To formalize the notion of arbitrary sparse, we introduce a polynomial-time computable, strictly increasing function \(u : \IN \to \IN\). Notice, as \(u\) is strictly increasing, we have \(u(n) \geq n\) for all \(n \in \IN\).
+  By adapting the proof of our main theorem \ref{thmMain}, we can show that there are even arbitrary sparse sets in \(\coNTIME(t(n))\) that do not possess an optimal proof system. To formalize the notion of arbitrary sparse, we introduce a polynomial-time computable, strictly increasing function \(u : \IN \to \IN\). Notice, as \(u\) is strictly increasing, we have \(u(n) \geq n\) for all \(n \in \IN\).
 
   We will use \(u\) to constrain the length of any string in \(L\). Therefore, we define
   \[
     \widetilde{L}'_i = \{ x \in L'_i : \exists_{k \in \IN} |x| = u(k) \}. 
   \]
-  By definition we obtain \(\widetilde{L}'_i \subseteq L_i\). We further define \(\widetilde{L} = \bigcup_{i>0} \widetilde{L}_i\). By doing so, in \(\widetilde{L}\) will only be strings whose length is in the range of \(u\). Informally speaking, the faster \(u\) is growing, the more sparse becomes \(\widetilde{L}\). More formally, we can state an upper bound for the density of \(\widetilde{L}\) as follows.
-  \begin{eqnarray*}
-    \dens_{\widetilde{L}}(n) 
-    &=& \sum_{k=0}^n \sharp \{ x \in \widetilde{L} : |x| = k \} \\
-    &\leq& \sum_{k=0}^n \sharp \{ x \in \Sigma^* : x = 0^a10^b \text{ and } |x| = k \} \\
-  \end{eqnarray*}
-  The faster \(u\) is growing, the more summands in this sum are zero, as there are many \(k\) not in the range of \(u\). The exact count of summands is \(u^{-1}(n)\), which we will define as the the greatest number \(x\) for which \(u(x) \leq n\). For each summand, \(k\) is an upper bound of its value, and as \(k \leq n\) we obtain 
-  \[
-   \dens_{\widetilde{L}}(n) \leq u^{-1}(n) \cdot n.
-  \]
-  \TODO{give an example}
+  By definition we obtain \(\widetilde{L}'_i \subseteq L_i\). We further define \(\widetilde{L} = \bigcup_{i>0} \widetilde{L}_i\). By doing so, in \(\widetilde{L}\) will only be strings whose length is in the range of \(u\). Informally speaking, the faster \(u\) is growing, the more sparse becomes \(\widetilde{L}\). By choosing fast-growing \(u\), we can obtain arbitrary sparse sets in \(\overline{\OPT}\).
 
-  In order to adapt the proof of theorem \ref{thmMain} to this new circumstances, we have to adapt one issue. It occurs in the proof that \(\widetilde{L}\) is in \(\coNTIME(t(n))\). In order to decide whether an given string \(x\) is in the complement \(\widetilde{L}\), we have to additionally check in polynomial time whether there is an \(k \in \IN\) such that \(|x| = u(k)\). Since \(u \in \FP\) and is strictly increasing, this is possible. As for any \(k > |x|\), it follows \(u(k) \geq |x|\), we have to calculate at most \(|x|\) times the value of \(u(k)\) in order to check if there is an \(k\) with \(u(k) = |x|\). If there is no such \(k\), then the given \(x\) is for sure in the complement of \(\widetilde{L}\) and we are done. If there is such a \(k\), we proceed with the algorithm as described before.
+  In order to adapt the proof of theorem \ref{thmMain} to this new circumstances, we have to discuss one issue. It occurs in the proof that \(\widetilde{L}\) is in \(\coNTIME(t(n))\). In order to decide whether an given string \(x\) is in the complement of \(\widetilde{L}\), we have to additionally check in polynomial time whether there is an \(k \in \IN\) such that \(|x| = u(k)\). Since \(u \in \FP\) and is strictly increasing, this is possible. As for any \(k > |x|\), it follows \(u(k) \geq |x|\), we have to calculate at most \(|x|\) times the value of \(u(k)\) in order to check if there is an \(k\) with \(u(k) = |x|\). If there is no such \(k\), then the given \(x\) is for sure in the complement of \(\widetilde{L}\) and we are done. If there is such a \(k\), we proceed with the algorithm as described before.
 
   Adapting the proof as described yields
   
   \begin{corollary} \label{corSparse}
-    Let \(t:\IN\to\IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Let \(u\) be a polynomial-time computable, strictly increasing function \(u:\IN\to\IN\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system; the density of \(L\) is bounded by 
-    \[
-     \dens_L(n) \leq u^{-1}(n) \cdot n,
-    \]
-    where \(u^{-1}\) denotes the smallest number \(m\) for which \(u(m) \geq n\).
+    Let \(t:\IN\to\IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Let \(u:\IN\to\IN\) be a polynomial-time computable, strictly increasing function. Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system and possesses only strings whose length is in \(u(\IN)\).
   \end{corollary}
 
 
@@ -134,26 +122,32 @@
   \begin{proof}
     As \(L\) has no optimal proof system, corollary \ref{corFurtherOPT} states that \(L' = 0L \cup 1L\) is polynomial time equivalent and does not possess an optimal proof system.
 
-    Let \(A\) be the language \(0\Sigma^*\), then \(\overline{A} = 1\Sigma^*\). We obtain \(L' \cap A = 0L\) and \(L' \cap \overline{A} = 1L\). As shown in corollary \ref{corFurtherOPT}, \(L\) and \(bL\) are polynomial time equivalent. Using \(0x \mapsto 1x\), \(0L\) and \(1L\) are also polynomial time equivalent. Hence, \(L'\) is many-one-mitotic.
+    To show that \(L'\) is many-one-mitotic, let \(A\) be the language \(0\Sigma^*\), then \(\overline{A} = 1\Sigma^* \cup \{ \varepsilon \}\). We obtain \(L' \cap A = 0L\) and \(L' \cap \overline{A} = 1L\). As shown in corollary \ref{corFurtherOPT}, \(L\) and \(bL\) are polynomial time equivalent. We obtain \(0L\) and \(L\) polynomial time equivalent, as well as \(L\) and \(1L\). Hence, \(L'\) is many-one-mitotic.
   \end{proof}
   
   
   \section{Putting the Results Together}
   
-  In this section, we will show that we can combine all results to one language, that is arbitrary sparse, tally, has no optimal proof system and possesses redundancy.
+  In this section, we will show that we can combine all results into one language, that is arbitrary sparse, tally, has no optimal proof system and possesses redundancy.
   
   \begin{corollary}
-    Let \(t:\IN\to\IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Let \(u\) be a polynomial-time computable, strictly increasing function \(u:\IN\to\IN\). Then there is a language \(L \in \coNTIME(t(n))\) that possesses no optimal proof system and 
+    Let \(t:\IN\to\IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(T \subseteq \Sigma^*\) that is polynomial time equivalent to a language of \(\coNTIME(t(n))\), possesses no optimal proof system and is
     \begin{enumerate}[(i)]
-     \item has its density bound by \(\dens_L(n) \leq u^{-1}(n) \cdot n\), where \(u^{-1}\) denotes the smallest number \(m\) for which \(u(m) \geq n\),
-     \item is many-one-mitotic,
-     \item is tally.
+     \item arbitrary sprase,
+     \item many-one-mitotic,
+     \item and tally.
     \end{enumerate}
   \end{corollary}
   
   \begin{proof}
-    Corollary \ref{corSparse} yields a language \(L \in \coNTIME(t(n))\) that has no optimal proof system and fulfills our demands on its sparseness. By using theorem \ref{thmMitotic}, we obtain the language \(0L \cup 1L\) that is polynomial time-equivalent to \(L\) and possesses no optimal proof system. Finally, we can use theorem \ref{thmTally} to construct a tally set \(T \notin \OPT\) and is polynomial time-equivalent to \(L\). \TODO{\(T \in \coNTIME(t(n))\)?}
+    Let \(u\) be a polynomial-time computable, strictly increasing function \(u:\IN\to\IN\). As we have seen in corollary \ref{corSparse}, we can obtain a language \(L \in \coNTIME(t(n))\) that has no optimal proof system and possesses only strings whose length is in the range of \(u\). As there is no upper bound for growth of \(u\), \(L\) is arbitrary sprase. 
+    
+    By using theorem \ref{thmMitotic}, we obtain the language \(0L \cup 1L\) that is polynomial time-equivalent to \(L\) and possesses no optimal proof system. Is contains only strings of length \(u(\IN) + 1\); is density is given by \(\dens_{0L \cup 1L}(n) = 2\dens_{L}(n)\). 
+    
+    Finally, we can use theorem \ref{thmTally} to construct a tally set \(T \notin \OPT\) that is polynomial time-equivalent to \(L\). As we use a strictly increasing pairing function, \(T\) is even more sparse than \(0L \cup 1L\). Is follows that \(\dens_T(n) \leq 2\dens_L(n)\). Hence, \(T\) is arbitrary sparse.
   \end{proof}
+  
+  By choosing \(t(n) = k^n\) respectively \(t(n) = 2^{n^k}\), we can obtain all results for the complexity classes \(\coNE\) respectively \(\coNEXP\).
 
 
 
