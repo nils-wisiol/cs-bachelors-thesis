@@ -1,7 +1,7 @@
-\chapter{A brief Overview of Proof Systems} \label{chpOverview}
+\chapter{A Brief Overview of Proof Systems} \label{chpOverview}
   After defining the important notions for this thesis, we will give a brief overview of some important results in the field of optimal proof systems.
   
-  \section{Languages possessing optimal proof systems}
+  \section{Languages Possessing Optimal Proof Systems}
   
   One basic lemma that is widely used formalizes a part of the connection between optimal proof systems and polynomial many-one-reducibility. Later in this thesis, we will use it to proof corollary \ref{corHardSets}. The following proof is mainly taken from Köbler et al. We will omit the proof for optimal proof systems, as it easily follows from the proof for p-optimal ones.
 
@@ -47,7 +47,7 @@
     We now construct polynomial time functions in order to show that \(L\), \(bL\) and \(0L \cup 1L\) are polynomial time equivalent. With the function discarding the first bit of any word, \(bw \mapsto w\), we obtain \(bL \redmany L\). With the function adding \(b\) to the start of any word, \(w \mapsto bw\), we obtain \(L \redmany bL\). With \(x \mapsto 0x\), we obtain \(L \redmany 0L \cup 1L\), as \(x \in L \Leftrightarrow 0x \in 0L \cup 1L\). Using \(bw \mapsto w\), we further obtain \(0L \cup 1L \redmany L\).
   \end{proof}
 
-  The following lemma gives a partial answer to the basic question what languages do have optimal proof systems. Although Koebler et al. omitted the proof of the following theorem due to its straightforwardness, we will give a proof for the purpose of this thesis.
+  The following lemma gives a partial answer to the basic question, which languages actually have optimal proof systems. Although Koebler et al. omitted the proof of the following theorem due to its straightforwardness, we will give a proof for the purpose of this thesis.
 
   \begin{lemma}[\cite{KMT03}] \label{lemPHasOptimalProofSystem}
    \begin{enumerate}[(i)]
@@ -90,7 +90,7 @@
     \end{enumerate}
   \end{proof}
   
-  \section{Proof Systems and the $\P$ versus $\NP$ question}  
+  \section{Proof Systems and the $\P$ Versus $\NP$ Question}  
 
   As we have seen, \(\NP \subseteq \OPT\). It is an open question whether \(\NP \supseteq \OPT\). Lemma \ref{lemPHasOptimalProofSystem} connects to the \(\P\)-versus-\(\NP\)-question by stating different properties for \(\P\) and \(\NP\): if one would find a set in \(\NP\) without an p-optimal proof system, one would have separated \(\P\) from \(\NP\).
 
@@ -132,7 +132,7 @@
   \[
     \NP = \coNP \Leftrightarrow \text{ there is a polynomially bounded proof system for } \TAUT.
   \]
-  Using this theorem, one tried to seperate \(\NP\) from \(\coNP\) by studying more and more powerful proof systems, showing that they are not polynomially bounded \cite{KMT03}. As mentioned before, there was no success on answering this questions until now. To take the notion of optimal proof systems into account, one could ask if there is an optimal or even p-optimal proof system for \(\TAUT\). If that were the case, then the existence of one specific proof system that is not polynomially bounded would suffice to proof that \(\NP \neq \coNP\) and hence \(\P \neq \NP\) \cite{KMT03}.
+  Using this theorem, one tried to separate \(\NP\) from \(\coNP\) by studying more and more powerful proof systems, showing that they are not polynomially bounded \cite{KMT03}. As mentioned before, there was no success in answering this questions yet. To take the notion of optimal proof systems into account, one could ask if there is an optimal or even p-optimal proof system for \(\TAUT\). If that were the case, the existence of one specific proof system that is not polynomially bounded would suffice to proof that \(\NP \neq \coNP\) and hence \(\P \neq \NP\) \cite{KMT03}.
 
   Kraj\'{\i}cek and Pudl{\'a}k proved a sufficient condition for the existence of optimal proof systems for \(\TAUT\) \cite{KP89}.
 
@@ -154,11 +154,6 @@
       \end{array}
     \]
   \end{corollary}
-
-  % results that could be included
-  % - theorem 22 BKM09
-  % - theorem 1.2 KMT03
-
 
 
 

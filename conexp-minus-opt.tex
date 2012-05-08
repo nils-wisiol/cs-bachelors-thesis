@@ -1,9 +1,9 @@
 \chapter{A set in $\coNEXP \setminus \OPT$} \label{chpConexpMinusOpt}
-  In the main theorem of this thesis, we will show that in certain complexity classes above of \(\NP\), there are always languages that possess no optimal proof system. To formalize this, we say a function is \defNotion{time-constructible}, if there is a Turing transducer that stops on input \(n\) after \(t(n)\) steps.
+  In the main theorem of this thesis, we will show that in certain complexity classes above of \(\NP\) there are always languages that possess no optimal proof system. To formalize this, we say a function is \defNotion{time-constructible}, if there is a Turing transducer that stops on input \(n\) after \(t(n)\) steps.
 
   \section{Basic Construction}
   
-  Before stating and proofing the main theorem of this thesis, we will have a look at universal Turing transducers. In contrast to usual transducers, an universal transducer \(U\) is able to simulate any other given transducer \(M_\alpha\). Given a program \(\alpha\) and an input \(y\), it then calculates \(M_\alpha(y) = U(\alpha, y)\). Doing so, the runtime of \(U\) is quadratic slower than the runtime of \(M\). We will need the propositions proven here later on in order to proof theorem \ref{thmMain}.
+  Before stating and proofing the main theorem of this thesis, we will have a look at universal Turing transducers. In contrast to usual transducers, an universal transducer \(U\) is able to simulate any other given transducer \(M_\alpha\). Given a program \(\alpha\) and an input \(y\), it calculates \(M_\alpha(y) = U(\alpha, y)\). Doing so, the runtime of \(U\) is quadratic slower than the runtime of \(M\). We will need the propositions proven here later to proof theorem \ref{thmMain}.
   
   \begin{lemma}\label{lemSimulation}
     \begin{enumerate}[(i)]
@@ -31,7 +31,7 @@
     Let \(t : \IN \to \IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(L \in \coNTIME(t(n))\) that has no optimal proof system.
   \end{theorem}
 
-  Notice, if for a function \(f\) there is an \(n \in \IN\) with \(f(n) \geq p(n)\) for every polynomial \(p\), then for every polynomial \(p\) there are infinitely many \(n \in \IN\) for which \(f(n) \geq p(n)\) is satisfied. Otherwise, we could construct a polynomial \(q\) that is greater than \(f\) for every \(n \in \IN\). To see this, let \(p\) be a polynomial for which \(f(n) \geq p(n)\) for only finitely many \(n \in \IN\). Then we can determine the greatest difference between \(f\) and \(p\) by taking the maximum of the set \(\eta = \{ f(n) - p(n), f(n) \geq p(n) \}\). Then for the polynomial \(p'(n) = \eta + p(n) + 1\) there is no \(n\) with \(f(n) \geq p'(n)\), which contradicts the assumption that for every polynomial \(p\) there is a natural number such that \(f(n) \geq p(n)\).
+  Notice that, if for a function \(f\) there is an \(n \in \IN\) with \(f(n) \geq p(n)\) for every polynomial \(p\), then for every polynomial \(p\) there are infinitely many \(n \in \IN\) for which \(f(n) \geq p(n)\) is satisfied. Otherwise, we could construct a polynomial \(q\) that is greater than \(f\) for every \(n \in \IN\). To see this, let \(p\) be a polynomial for which \(f(n) \geq p(n)\) for only finitely many \(n \in \IN\). Then we can determine the greatest difference between \(f\) and \(p\) by taking the maximum of the set \(\eta = \max \{ f(n) - p(n) : f(n) \geq p(n) \}\). Then for the polynomial \(p'(n) = \eta + p(n) + 1\) there is no \(n\) with \(f(n) \geq p'(n)\), which contradicts the assumption that for every polynomial \(p\) there is a natural number such that \(f(n) \geq p(n)\).
 
   Messner showed that under the same presumptions as in our theorem, there is a language \(L \in \coNTIME(t(n))\) without an optimal acceptor \cite{Mes99}. He also proved that the existence of an optimal acceptor is equivalent to the existence of an optimal proof system for every p-cylinder \(L\). We will here give a proof that is based on the work of Messner, but stays in the notion of proof systems.
 
@@ -133,14 +133,14 @@
   \begin{corollary}
     Let \(t:\IN\to\IN\) be a time-constructible function such that for every polynomial \(p\) there is a number \(n\) with \(p(n) \leq t(n)\). Then there is a language \(T \subseteq \Sigma^*\) that is polynomial time equivalent to a language of \(\coNTIME(t(n))\), possesses no optimal proof system and is
     \begin{enumerate}[(i)]
-     \item arbitrary sprase,
+     \item arbitrary sparse,
      \item many-one-mitotic,
      \item and tally.
     \end{enumerate}
   \end{corollary}
   
   \begin{proof}
-    Let \(u\) be a polynomial-time computable, strictly increasing function \(u:\IN\to\IN\). As we have seen in corollary \ref{corSparse}, we can obtain a language \(L \in \coNTIME(t(n))\) that has no optimal proof system and possesses only strings whose length is in the range of \(u\). As there is no upper bound for growth of \(u\), \(L\) is arbitrary sprase. 
+    Let \(u\) be a polynomial-time computable, strictly increasing function \(u:\IN\to\IN\). As we have seen in corollary \ref{corSparse}, we can obtain a language \(L \in \coNTIME(t(n))\) that has no optimal proof system and possesses only strings whose length is in the range of \(u\). As there is no upper bound for growth of \(u\), \(L\) is arbitrary sparse. 
     
     By using theorem \ref{thmMitotic}, we obtain the language \(0L \cup 1L\) that is polynomial time-equivalent to \(L\) and possesses no optimal proof system. Is contains only strings of length \(u(\IN) + 1\); is density is given by \(\dens_{0L \cup 1L}(n) = 2\dens_{L}(n)\). 
     
