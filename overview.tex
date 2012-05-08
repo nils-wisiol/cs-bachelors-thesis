@@ -105,13 +105,7 @@
   \end{lemma}
   
   \begin{proof}
-    Without further assumptions, we can show by using a nondeterministic Turing transducer, that an arbitrary formula is not a tautology in polynomial time by guessing and verifying an assignment for which the formula is falsified. Thus, \(\overline{\TAUT} \in \NP\).
-
-    For every \(L \in \NP\), there is a function \(f \in \FP\) such that \(x \in L \Leftrightarrow f(x) \in \overline{\TAUT}\). We will show this as follows. As \(\SAT\) is \(\redmany\)-complete for \(\NP\), we can reduce every \(L \in \NP\) and obtain an \(f' \in \FP\) with \(x \in L \Leftrightarrow f'(x) \in \SAT\). Hence, there is a truth assignment for \(f'(x)\) such that \(f'(x)\) yields true. By negating, we obtain the existence of a truth assignment such that \(\neg f'(x)\) is false. Consequently, \(\neg f'(x) \in \overline{\TAUT}\). Notice that the negation of \(f'(x)\) can be done efficiently. By choosing \(f(x) = \neg f'(x)\), we obtain \(f \in \FP\) with the stated properties.
-
-    Assume \(\TAUT \in \NP\), and let \(L\) be an arbitrary language with \(L \in \NP\). As shown above, there is a function \(f \in \FP\) such that \(x \in L \Leftrightarrow f(x) \in \overline{\TAUT}\) respectively \(x \in \overline{L} \Leftrightarrow f(x) \in \TAUT\). Since \(\TAUT \in \NP\), for any given \(x \in \Sigma^*\) we can in nondeterministic polynomial time decide whether \(f(x)\) is in \(\TAUT\). Thus we also can decide in nondeterministic polynomial time whether \(x \in \overline{L}\), as \(f \in \FP\). It follows that \(\overline{L} \in \NP\). As this proves that \(\NP\) is closed under complement, we obtain \(\NP \subseteq \coNP\). To see that \(\coNP \subseteq \NP\), let an arbitrary language \(\overline{L}\) be in \(\coNP\). By definition we obtain \(L \in \NP\). As \(\NP\) is closed under complement, \(\overline{L} \in \NP\). Thus, \(\coNP \subseteq \NP\).
-
-    Assume \(\TAUT \notin \NP\), then \(\overline{\TAUT} \notin \coNP\). As we have seen above, \(\overline{\TAUT} \in \NP\). Hence \(\NP \neq \coNP\).
+    Assume \(\TAUT \in \NP\), then \(\overline{\SAT}\) is in \(\coNP\). As \(\SAT\) is \(\NP\) complete, is follows that \(\coNP = \NP\). Assume \(\TAUT \notin \NP\), then \(\overline{\TAUT} \notin \coNP\). As we have seen above, \(\overline{\TAUT} \in \NP\). Hence \(\NP \neq \coNP\).
   \end{proof}
 
   The second lemma connects with the theory of proof systems by formulating a necessary and sufficient condition for a language being in \(\NP\) \cite{CR79}.

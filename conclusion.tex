@@ -2,13 +2,18 @@
   
   \section{Conclusion}
   
-  In this thesis, we presented some fundamental insights into proof systems and the optimality of proof systems. The main motivation to study proof systems was given by some implications that propositions on proof systems could have on the \(\P\) versus \(\NP\) questions and the separation of \(\NP\) and \(\coNP\).
+  In this thesis, we presented some fundamental insights into proof systems and the notion of optimality of proof systems. The main motivation to study proof systems was given by some implications that propositions on proof systems could have on the \(\P\) versus \(\NP\) question and the separation of \(\NP\) and \(\coNP\).
   
   In chapter \ref{chpOverview}, we proved some basic lemmata, and showed which relatively easy complexity classes are containing languages that possess optimal proof systems. The proof that every language \(L\) in \(\P\) or \(\NP\) has an optimal proof system was straightforward and did not depend on complex results proven earlier. Differently, we needed some more work to prove proposition \ref{prpNPcoNP} to establish the connection between proof systems and the \(\P\) versus \(\NP\) problem.
   
-  Subsequently, in chapter \ref{chpConexpMinusOpt}, we moved on to complexity classes above the polynomial ones. We showed that by leaving the polynomial area, we can construct a language in \(\coNTIME(t(n))\) that does not posses an optimal proof system. By further research on \(L\), we could state that we even obtain sparse, tally or redundant languages that can not have an optimal proof system. In conclusion, we succeeded on combining these properties in one language, uniting all previous stated attributes.
+  Subsequently, in chapter \ref{chpConexpMinusOpt}, we moved on to complexity classes above the polynomial ones. We showed that by leaving the polynomial area, we can construct a language in \(\coNTIME(t(n))\) that does not possess an optimal proof system. By further research on \(L\), we could state that we even obtain sparse, tally or redundant languages that can not have an optimal proof system. In conclusion, we succeeded on combining these properties in one language, uniting all previous stated attributes.
   
   \section{Future Work}
 
   As mentioned before, the question whether \(\NP = \OPT\) remains still open. Although we could easily prove \(\NP \subseteq \OPT\), we do not know if every set that possesses an optimal proof system is in \(\NP\).
   
+  In order to get some insight into this question, we could define variations of the simulation notion for proof systems. Let \(h, h'\) be proof systems for \(L\). One could define \(h\) \defNotion{simulates} \(h'\) \defNotion{\(f\)-bounded}, if there is a function \(g\) such that for every string \(w \in \Sigma^*\)
+  \[
+    h(g(w)) = h'(w)
+  \]
+  and \(|g(w)| \leq f(|w|)\). By doing so, we obtain \defNotion{\(f\)-optimal} proof systems in the same way as defined before and are able to define complexity classes \(\OPT_f\). One could investigate whether \(\OPT_f \supseteq \NP\) for an arbitrary \(f\), like \(f(n) = c \cdot n\) or \(f(n) = n + c\).
