@@ -1,0 +1,26 @@
+% Farbschema
+\usetheme{default}
+\usecolortheme{default}
+
+% Formatierung von Literaturverweisen
+\setbeamertemplate{bibliography item}[text]
+
+% Formatierung von "verdecktem" Text
+\setbeamercovered{transparent}
+
+% Anzahl der Abschnitte, die Nummeriert werden
+\setcounter{secnumdepth}{5}
+
+% Absatz-Abstand
+\setlength{\parskip}{6pt}
+
+% Formatierung von Zitaten für Theoreme
+\newcommand{\rcite}[1]{\flushright\textcolor{gray}{\cite{#1}}}
+\newcommand{\rciteplain}[1]{\flushright\textcolor{gray}{#1}}
+
+% Propositions-Theorem-Umgebung
+\newtheorem{proposition}[theorem]{Proposition} % Proposition numbering together with theorem
+
+% Figure-Caption
+\usepackage{caption}
+\captionsetup{labelformat=empty,labelsep=none}

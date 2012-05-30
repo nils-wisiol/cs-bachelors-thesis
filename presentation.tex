@@ -1,0 +1,47 @@
+\documentclass{beamer}
+\usepackage[utf8x]{inputenc}
+
+% ggf. Pausen deaktivieren (Druckversion)
+%\documentclass[handout]{beamer} % \pause deaktivieren
+
+% Standard-Beamer verwenden
+\usepackage{default}
+
+% Konfiguration
+\include{packages}
+\include{symbols}
+\include{Presentation/beamer}
+
+% Metadaten
+\title[Simulation von Beweissystemen]{Simulation von Beweissystemen}
+\subtitle[Bachelor Kolloquium]{Bachelor Kolloquium}
+\author[N. Wisiol]{Nils Wisiol}
+\institute[Informatik -- Uni Würzburg]{Lehrstuhl für Informatik IV\\Institut für Informatik\\ Julius-Maximilians-Universität Würzburg}
+\date[04.06.2012]{04. Juni 2012}
+\subject{Simulation von Beweissystemen}
+
+\begin{document}
+
+  % Titelfolie
+  \maketitle
+
+  % Inhaltsverzeichnis
+  \begin{frame}
+    \frametitle{Outline}
+    \small
+    \tableofcontents[hidesubsections]
+    \normalsize
+  \end{frame}
+  
+  % Inhalt
+  \include{Presentation/introduction}
+  \include{Presentation/preliminaries}
+  \include{Presentation/results}
+  \include{Presentation/main-theorem}
+  \include{Presentation/consequences}
+  \include{Presentation/conclusion}
+  
+  % Literaturverzeichnis
+  \include{Presentation/bibliography}
+  
+\end{document}

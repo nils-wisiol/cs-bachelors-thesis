@@ -1,0 +1,20 @@
+\section{Definitionen und Voraussetzungen} 
+\subsection{Beweissysteme}
+
+\begin{frame}
+  \frametitle{Beweissysteme}
+  
+  \onslide<1-3> Eine \(\FP\)-Funktion \(h\) ist ein \defNotion{Beweissystem} für eine Sprache \(L\), wenn \(f(\Sigma^*) = L\). 
+  \onslide<2-3> Ist \(h(w) = x\), so ist \(w\) ein \defNotion{\(h\)-Beweis} für \(x\). 
+  \onslide<3-3> \(h\) ist \defNotion{polynomiell beschränkt}, wenn es ein Polynom \(p\) gibt, so dass für jedes \(x \in L\) ein \(h\)-Beweis \(w\) mit \(|w| \leq p(|x|)\) existiert. 
+  
+  \onslide<4-8> Sind \(h\) und \(h'\) Beweissysteme für die Sprache \(L\), 
+  \onslide<5-8> und gibt es ein Polynom \(p\) und eine Funktion \(f\) 
+  \onslide<6-8> so dass für alle \(h'\)-Beweise \(w\) \[ h(f(w)) = h'(w) \] 
+  \onslide<7-8> mit \(|f(w)| \leq p(|w|)\) gilt, 
+  \onslide<8-8> dann \defNotion{simuliert} \(h\) das Beweissystem \(h'\). 
+  
+  \onslide<9-10> Simuliert ein Beweissystem \(h\) für die Sprache \(L\) jedes Beweissystem der Sprache \(L\), so nennen wir es \defNotion{optimal}. 
+  \onslide<10-10> Die Komplexitätsklasse aller Sprachen, die optimale Beweissysteme besitzen, sei mit \(\OPT\) bezeichnet.
+\end{frame}
+
