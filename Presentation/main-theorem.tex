@@ -89,13 +89,11 @@
   \end{itemize}
 
   \onslide<14>
-
-  
 \end{frame}
 
 
 \begin{frame}
-  \frametitle{Eigenschaft von \(L\)-Beweissystemen}
+  \frametitle{Eigenschaft von Beweissystemen für \(L\)}
 
   Erinnerung: \(L_i' = \{ x \in L_i : \forall_{y \in \Sigma^*} |y|^{2i} \leq 2^{|x|} \implies f_i(y) \neq x \}\)
   
@@ -111,5 +109,24 @@
       \item<6-> folglich \(x \in L_i'\) und daher \(x \in L\)
     \end{itemize}
   \end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Widerspruch zur Existenz von optimalen Beweissystemen für \(L\)}
+
+  \begin{itemize}
+   \item<1-> Sei \(f_i\) optimales Beweissystem für \(L\)
+   \item<2-> Sei
+         \(g(bx) =
+           \begin{cases}
+             f_i(x) & (b=0) \\
+             x      & (b = 1 \text{ and } x=0^i10^* \in L_i = L_i') 
+           \end{cases}\)
+   \item<3-> \(g\) ist Beweissystem für \(L\)
+   \item<4-> \(f_i\) ist optimal, also ex. \(f^*\), Überführen von Beweisen: \(f_i(f^*(x)) = g(x)\), polynomiell beschränkt: \(|f^*(x)| \leq p(|x|)\)
+   \item<5-> in \(L_i\) gibt es ein \(x\), so dass \(|f^*(x)| \leq p(|x|) \leq p(|x|)^{2i} \leq 2^{|x|}\).
+   \item<6-> Definition von \(L_i'\): \(f_i(f^*(x)) \neq x\)
+  \end{itemize}
+
 \end{frame}
 
