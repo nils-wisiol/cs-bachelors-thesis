@@ -1,4 +1,4 @@
-\section{Hauptsatz} 
+\section{Sprachen ohne optimales Beweissystem} 
 \subsection{Sprachen ohne optimales Beweissystem}
 
 \begin{frame}
@@ -47,22 +47,13 @@
 \begin{frame}
   \frametitle{Konstruktion der gesuchten Sprache \(L\)}
 
-  \begin{columns}
-    \column{.2\textwidth}
-      \begin{figure}
-        \includegraphics[width=\textwidth]{Presentation/Images/KurtGoedel.jpg}
-        \caption{Kurt Gödel \\ 1906 -- 1978}
-      \end{figure}
-
-    \column{.8\textwidth}
-      \begin{itemize}
-        \item<1-> \(L_i = 0^i10^*\)
-        \item<2-> Wähle \(x \in L_i'\), die keine kurzen \(f_i\)-Beweise haben
-                  \[L_i' = \{ x \in L_i : \forall_{y \in \Sigma^*} |y|^{2i} \leq 2^{|x|} \implies f_i(y) \neq x \}\]
-        \item<3-> Vereinigung
-                  \[L = \bigcup_{i>0} L_i' \]
-      \end{itemize}
-  \end{columns}
+  \begin{itemize}
+    \item<1-> \(L_i = 0^i10^*\)
+    \item<2-> Wähle \(x \in L_i'\), die keine kurzen \(f_i\)-Beweise haben
+              \[L_i' = \{ x \in L_i : \forall_{y \in \Sigma^*} |y|^{2i} \leq 2^{|x|} \implies f_i(y) \neq x \}\]
+    \item<3-> Vereinigung
+              \[L = \bigcup_{i>0} L_i' \]
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -78,41 +69,44 @@
 
   \onslide<6->
   
-  \(\overline{L_i'} = \{ x \in \Sigma^* : \alert<8-9>{ x \notin L_i } \vee \left( \alert<11>{ \exists_{y \in \Sigma^*} \left( |y|^{2i} \leq 2^{|x|} \right) } \wedge \alert<13>{ \left( f_i(y) = x \right) } \right)  \}\)
+  \(\overline{L_i'} = \{ x \in \Sigma^* : \alert<9>{ x \notin L_i } \vee \left( \alert<12>{ \exists_{y \in \Sigma^*} \left( |y|^{2i} \leq 2^{|x|} \right) } \wedge \alert<14>{ \left( f_i(y) = x \right) } \right)  \}\)
 
   \onslide<7-> Sei dazu \(x\) beliebiges Wort.
 
   \begin{itemize}
    \item<8-> Prüfe, ob \(x\) in irgendeinem \(L_i\): \onslide<9-> \alert<9>{falls nicht, dann \(x \in \overline{L}\) }
    \item<10-> Wählte \(i^*\) so, dass \(x \in L_{i^*}\)
-   \item<11-> \alert<11>{für jedes \(y\) mit \(|y|^{2i} \leq 2^{|x|}\)}: \onslide<12-> berechne \(f_{i^*}(y)\). \onslide<13-> \alert<13>{Genau falls \(f_{i^*}(y) = x\), dann \(x \in \overline{L}\).}
+   \item<11-> \(x \in \overline{L_j'}\) für \(j \neq i\)
+   \item<12-> \alert<12>{für jedes \(y\) mit \(|y|^{2i} \leq 2^{|x|}\)}: \onslide<13-> berechne \(f_{i^*}(y)\). \onslide<14-> \alert<14>{Genau falls \(f_{i^*}(y) = x\), dann \(x \in \overline{L}\).}
   \end{itemize}
 
-  \onslide<14>
+  \onslide<15>
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Eigenschaft von Beweissystemen für \(L\)}
 
-  Erinnerung: \(L_i' = \{ x \in L_i : \forall_{y \in \Sigma^*} |y|^{2i} \leq 2^{|x|} \implies f_i(y) \neq x \}\)
+  Erinnerung: \(L_i' = \{ x \in L_i : \forall_{y \in \Sigma^*} |y|^{2i} \leq 2^{|x|} \implies f_i(y) \neq x \}\) \\
+  und: \(\overline{L_i'} = \{ x \in \Sigma^* : x \notin L_i \vee \left( \exists_{y \in \Sigma^* \left( |y|^{2i} \leq 2^{|x|} \right) } \wedge  \left( f_i(y) = x \right) \right)  \}\)
   
   \begin{itemize}
    \item<2-> jedes Beweissystem für \(L\) ist ein \(f_i\)
    \item<3-> für dieses ist \(L_i = L_i'\)
   \end{itemize}
 
-  \begin{proof}
-    \begin{itemize}
-      \item<4-> angenommen, es gibt ein \(x = 0^i1z \in L_i\) das nicht in \(L_i'\) liegt
-      \item<5-> dann gibt es \(y\) mit \(y^{2i} \leq 2^{|x|}\) und \(f_i(y) = x\)
-      \item<6-> folglich \(x \in L_i'\) und daher \(x \in L\)
-    \end{itemize}
-  \end{proof}
+  \begin{itemize}
+    \item<4-> sei \(f_i\) ein Beweissystem für \(L\)
+    \item<5-> angenommen, es gibt ein \(x = 0^i1z \in L_i\) das nicht in \(L_i'\) liegt
+    \item<6-> dann gibt es \(y\) mit \(y^{2i} \leq 2^{|x|}\) und \(f_i(y) = x\)
+    \item<7-> folglich \(x \in L\) und daher \(x \in L_i'\)
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Widerspruch zur Existenz von optimalen Beweissystemen für \(L\)}
+
+  Erinnerung: \(L_i' = \{ x \in L_i : \forall_{y \in \Sigma^*} |y|^{2i} \leq 2^{|x|} \implies f_i(y) \neq x \}\)
 
   \begin{itemize}
    \item<1-> Sei \(f_i\) optimales Beweissystem für \(L\)
@@ -124,8 +118,11 @@
            \end{cases}\)
    \item<3-> \(g\) ist Beweissystem für \(L\)
    \item<4-> \(f_i\) ist optimal, also ex. \(f^*\), Überführen von Beweisen: \(f_i(f^*(x)) = g(x)\), polynomiell beschränkt: \(|f^*(x)| \leq p(|x|)\)
-   \item<5-> in \(L_i\) gibt es ein \(x\), so dass \(|f^*(x)| \leq p(|x|) \leq p(|x|)^{2i} \leq 2^{|x|}\).
-   \item<6-> Definition von \(L_i'\): \(f_i(f^*(x)) \neq x\)
+   \item<5-> sei \(x\) aus \(L_i\), so dass \(p(|1x|)^{2i} \leq 2^{|1x|}\).
+   \item<6-> \(1x\) ist \(g\)-Beweis für \(x\): \(g(1x) = x\)
+   \item<7-> Dann mit \(y = f^*(1x)\): \(|y| \leq p(|1x|) \leq p(|1x|)^{2i} \leq 2^{|1x|}\).
+   \item<8-> Definition von \(L_i'\): \(f_i(y) \neq x\), also \(y = f^*(1x)\) kein \(f_i\)-Beweis für \(x\)
+   \item<9-> Widerspruch zur Optimalität \onslide<10-> \(\square\)
   \end{itemize}
 
 \end{frame}
