@@ -1,0 +1,53 @@
+\documentclass[letterpaper,parskip]{scrartcl}
+\usepackage[utf8x]{inputenc}
+\usepackage[left=40mm,right=40mm]{geometry}
+
+% Konfiguration
+\include{packages}
+\include{symbols}
+\include{theorems}
+
+\begin{document}
+
+  \pagestyle{empty}
+
+  {\huge Simulation of Proof Systems} \hfill Nils Wisiol
+
+  \vspace{3cm}
+  
+  \begin{definition}
+    A function \(h \in \FP\) is called \defNotion{proof system} for a language \(L\) if the range of \(h\) is \(L\). A string \(w\) with \(h(w) = x\) is called an \defNotion{\(h\)-proof} for \(x\).
+  \end{definition}
+
+  With this definition, a proof system for \(L\) is basically a polynomial-time bounded function that enumerates \(L\). To give an example, let \(sat\) be defined by
+    \[
+       sat(x) =
+       \begin{cases}
+         \varphi & (x = \langle \alpha, \varphi \rangle \text{ and \(\alpha\) is an satisfying assignment for \(\varphi\)}), \\
+         \perp & (\text{otherwise}). \\
+       \end{cases}
+    \]
+  Then \(h\) is a proof system for \(\SAT\).
+
+  Notice, in spite of its time bound against the input, the shortest proof of a string \(w \in L\) can be be very long. There may be various proof systems for a language \(L\). In order to make them comparable, we define the notion of \defNotion{simulation} of proof systems.
+  
+  \begin{definition}
+    Let \(h\) and \(h'\) be proof systems for a language \(L\). If there is a polynomial \(p\) and a function \(f\) such that for all \(w \in \Sigma^*\)
+      \[
+        h(f(w)) = h'(w)
+      \]
+    and \(|f(w)| \leq p(|w|)\), then \(h\) \defNotion{simulates} \(h'\).
+  \end{definition}
+
+  Informally speaking, \(f\) translates \(h\)-proofs into polynomial length bounded \(h'\)-proofs. Notice, \(f\) could be hard or even impossible to calculate.
+
+  \begin{definition}
+    A proof system \(h\) for a language \(L\) is called \defNotion{optimal}, if it simulates every proof system for \(L\).
+  \end{definition}
+
+  \begin{definition}
+    Let \defNotion{\(\OPT\)} be the complexity class of all languages that have an optimal proof system.
+  \end{definition}  
+  
+
+\end{document}

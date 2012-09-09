@@ -1,33 +1,43 @@
-\section{Beweis der Motivation} 
-\subsection{Beweis von Proposition 1}
+% \section{Beweis der Motivation} 
+% \subsection{Beweis von Proposition 1}
+% 
+% \begin{frame}
+%   \frametitle{Proposition 1}
+% 
+%   \begin{center}
+%    
+%     \(\P = \NP\)
+%     \onslide<2-> \(\Rightarrow \NP = \coNP\)
+%     \onslide<3-> \(\Leftrightarrow \TAUT \in \NP\)
+%     \onslide<4-5> \(\Leftrightarrow \TAUT \text{ besitzt poly. beschr. Beweissystem}\)
+% 
+%   \end{center}
+%   
+%   \onslide<1->
+%   \begin{itemize}
+%    \item<2> Denn \(\P = \coP\)
+%    \item<3> Lemma 6
+%    \item<4> Lemma 7
+%   \end{itemize}
+% \end{frame}
+
+\section{Languages with Optimal Proof Systems}
 
 \begin{frame}
-  \frametitle{Proposition 1}
-
-  \begin{center}
-   
-    \(\P = \NP\)
-    \onslide<2-> \(\Rightarrow \NP = \coNP\)
-    \onslide<3-> \(\Leftrightarrow \TAUT \in \NP\)
-    \onslide<4-5> \(\Leftrightarrow \TAUT \text{ besitzt poly. beschr. Beweissystem}\)
-
-  \end{center}
-  
-  \onslide<1->
-  \begin{itemize}
-   \item<2> Denn \(\P = \coP\)
-   \item<3> Lemma 6
-   \item<4> Lemma 7
-  \end{itemize}
-\end{frame}
-
-\section{Sprachen mit optimalen Beweissystemen}
-
-\begin{frame}
-  \frametitle{Sprachen mit Beweissystemen}
+  \frametitle{Languages with Optimal Proof Systems}
 
   \begin{itemize}
-    \item<2-> \(P\) \onslide<3-> Jedes \(x \in L\) ist sein eigener Beweis
-    \item<4-> \(NP\) \onslide<5-> wie oben, nur mit Trick: Nummer des berechnenden Pfades ist auch Eingabe
+    \item<2-> \(\P \subseteq \OPT\):
+      \onslide<3-> \(L \in P\) has a proof system \(f\): choose \(f : \Sigma^* \to L\) with \(f(x) = x\) if \(x \in L\), otherwise \(f\) is undefined.
+      \onslide<4-> For any other proof system \(g\) of \(L\), \(g\) itself translates \(g\)-proofs into \(h\)-proofs in polynomial time.
+    \item<5-> \(\NP \subseteq \OPT\): \onslide<6-> For any \(L \in \NP\), there is a nondet. TM that accepts \(L\) in poly. time. \onslide<7-> Let \(f(\langle x, i \rangle)\) be the function defined by
+    \[ f(\langle x, i \rangle) =
+     \begin{cases}
+       x & \text{if } M \text{ accepts } x \text{ on the \(i\)-th path}, \\
+       \perp & \text{otherwise}.
+     \end{cases}
+    \]
+    \onslide<8-> \(f\) can be calculated in polynomial time and \(f\) has range \(L\). Hence, \(f\) is a proof system for \(L\).
+    \onslide<9-> Let \(g\) be an arbitrary proof system for \(L\). Then \(g\) itself translates \(g\)-proofs into \(f\)-proofs. Hence, \(f\) is an optimal proof system for \(L\).
   \end{itemize}
 \end{frame}

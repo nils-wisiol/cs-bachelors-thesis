@@ -1,20 +1,20 @@
-\section{Definition} 
-\subsection{Beweissysteme}
+\section{Preliminaries} 
+\subsection{Optimal Proof Systems}
 
 \begin{frame}
-  \frametitle{Beweissysteme}
+  \frametitle{Optimal Proof Systems}
   
-  \onslide<1-3> Eine \(\FP\)-Funktion \(h\) ist ein \defNotion{Beweissystem} für eine Sprache \(L\), wenn \(f(\Sigma^*) = L\). 
-  \onslide<2-3> Ist \(h(w) = x\), so ist \(w\) ein \defNotion{\(h\)-Beweis} für \(x\). 
-  \onslide<3-3> \(h\) ist \defNotion{polynomiell beschränkt}, wenn es ein Polynom \(p\) gibt, so dass für jedes \(x \in L\) ein \(h\)-Beweis \(w\) mit \(|w| \leq p(|x|)\) existiert. 
+  \onslide<1-3> A \(\FP\)-function \(h\) is called \defNotion{proof system} for a language \(L\), if \(f(\Sigma^*) = L\).
+  \onslide<2-3> If \(h(w) = x\) holds, we call \(w\) a \defNotion{\(h\)-proof} for \(x\).
+  %\onslide<3-3> \(h\) ist \defNotion{polynomiell beschränkt}, wenn es ein Polynom \(p\) gibt, so dass für jedes \(x \in L\) ein \(h\)-Beweis \(w\) mit \(|w| \leq p(|x|)\) existiert. 
   
-  \onslide<4-8> Sind \(h\) und \(h'\) Beweissysteme für die Sprache \(L\), 
-  \onslide<5-8> und gibt es ein Polynom \(p\) und eine Funktion \(f\) 
-  \onslide<6-8> so dass für alle \(h'\)-Beweise \(w\) \[ h(f(w)) = h'(w) \] 
-  \onslide<7-8> mit \(|f(w)| \leq p(|w|)\) gilt, 
-  \onslide<8-8> dann \defNotion{simuliert} \(h\) das Beweissystem \(h'\). 
+  \onslide<3-7> Let \(h\) and \(h'\) be proof systems for a language \(L\),
+  \onslide<4-7> and let \(p\) be a polynomial and a let \(f\) be a function
+  \onslide<5-7> such that for all \(h'\)-proofs \(w\) it holds that \[ h(f(w)) = h'(w), \]
+  \onslide<6-7> where \(|f(w)| \leq p(|w|)\) holds.
+  \onslide<7-7> In this case, we say \(h\) \defNotion{simulates} the proof system \(h'\).
   
-  \onslide<9-10> Simuliert ein Beweissystem \(h\) für die Sprache \(L\) jedes Beweissystem der Sprache \(L\), so nennen wir es \defNotion{optimal}. 
-  \onslide<10-10> Die Komplexitätsklasse aller Sprachen, die optimale Beweissysteme besitzen, sei mit \(\OPT\) bezeichnet.
+  \onslide<8-9> If a proof system \(h\) for a language \(L\) simulates every other proof system for the same language \(L\), we call it \defNotion{optimal}.
+  \onslide<9-9> Let \(\OPT\) be the complexity class of all languages possessing a optimal proof system.
 \end{frame}
 
